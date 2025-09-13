@@ -16,7 +16,7 @@
 
 #if FOR_WINDOWS || defined(OSX_BUILD)
 # define GLEW_STATIC
-# include <GL/glew.h>
+# include <OpenGLES/ES2/gl.h>
 #endif
 
 #define GL_GLEXT_PROTOTYPES 1
@@ -476,7 +476,7 @@ static struct ShaderProgram *gfx_opengl_create_and_load_new_shader(struct ColorC
         glGetShaderiv(fragment_shader, GL_INFO_LOG_LENGTH, &max_length);
         char error_log[1024];
         fprintf(stderr, "Fragment shader compilation failed\n");
-        glGetShaderInfoLog(fragment_shader, max_length, &max_length, &error_log[0]);
+        glGetShaderInfoLog(fragment_shader, max_length, NULL, &error_log[0]);
         fprintf(stderr, "%s\n", &error_log[0]);
         sys_fatal("fragment shader compilation failed (see terminal)");
     }
@@ -687,7 +687,8 @@ static inline bool gl_get_version(int *major, int *minor, bool *is_es) {
 }
 
 static void gfx_opengl_init(void) {
-#if FOR_WINDOWS || defined(OSX_BUILD)
+// #if FOR_WINDOWS || defined(OSX_BUILD)
+#if 0
     GLenum err;
     if ((err = glewInit()) != GLEW_OK)
         sys_fatal("could not init GLEW:\n%s", glewGetErrorString(err));

@@ -417,6 +417,7 @@ void* main_game_init(UNUSED void* dummy) {
     gGameInited = true;
 }
 
+/*
 int main(int argc, char *argv[]) {
     // handle terminal arguments
     if (!parse_cli_opts(argc, argv)) { return 0; }
@@ -570,3 +571,4 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+*/

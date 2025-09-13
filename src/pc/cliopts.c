@@ -58,6 +58,11 @@ bool parse_cli_opts(int argc, char* argv[]) {
     memset(&gCLIOpts, 0, sizeof(gCLIOpts));
     gCLIOpts.enableMods = NULL;
 
+    char spbuf[512];
+    strcpy(spbuf, getenv("HOME"));
+    strcat(spbuf, "/Documents");
+    arg_string("--savepath", spbuf, gCLIOpts.SavePath);
+
     for (int i = 1; i < argc; i++) {
 #if defined(_WIN32) || defined(_WIN64)
         if (!strcmp(argv[i], "--console")) {
