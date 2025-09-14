@@ -385,7 +385,7 @@ const char *sys_exe_path_file(void) {
 }
 
 static void sys_fatal_impl(const char *msg) {
-    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR , "Fatal error", msg, NULL);
+    // SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR , "Fatal error", msg, NULL);
     fprintf(stderr, "FATAL ERROR:\n%s\n", msg);
     fflush(stderr);
     exit(1);

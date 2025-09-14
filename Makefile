@@ -17,7 +17,7 @@ C_DEFINES :=
 # 'make clean' may be required first.
 
 # Build debug version
-DEBUG ?= 0
+DEBUG ?= 1
 
 # Enable development/testing flags
 DEVELOPMENT ?= 0
@@ -31,8 +31,14 @@ TARGET_RPI ?= 0
 # Build and optimize for RK3588 processor
 TARGET_RK3588 ?= 0
 
+# Build for iOS devices
+TARGET_IOS ?= 1
+
 # Makeflag to enable OSX fixes
-OSX_BUILD ?= 0
+OSX_BUILD ?= 1
+
+# Enable -no-pie linker option
+NO_PIE ?= 1
 
 # Specify the target you are building for, TARGET_BITS=0 means native
 TARGET_ARCH ?= native
@@ -43,9 +49,9 @@ TEXTURE_FIX ?= 0
 # Enable level texture enhancements by default (Castle Grounds and Castle Courtyard recolorable texture hills)
 ENHANCE_LEVEL_TEXTURES ?= 1
 # Enable Discord Game SDK (used for Discord invites)
-DISCORD_SDK ?= 1
+DISCORD_SDK ?= 0
 # Enable CoopNet SDK (used for CoopNet server hosting)
-COOPNET ?= 1
+COOPNET ?= 0
 # Enable docker build workarounds
 DOCKERBUILD ?= 0
 # Sets your optimization level for building.
@@ -122,6 +128,10 @@ ifeq ($(HOST_OS),Windows)
   WINDOWS_BUILD := 1
 endif
 
+ifeq ($(TARGET_IOS),1)
+  OSX_BUILD = 1
+endif
+
 ifeq ($(HOST_OS),Darwin)
   OSX_BUILD := 1
 
@@ -195,6 +205,26 @@ endif
 
 ifeq ($(TARGET_BITS), 32)
     DEFINES += BITS_32=1
+endif
+
+## macOS overrides
+
+
+ifeq ($(HOST_OS),Darwin)
+  OSX_BUILD := 1
+
+  # Using Homebrew?
+  ifeq ($(shell which brew >/dev/null 2>&1 && echo y),y)
+    PLATFORM := $(shell uname -m)
+    OSX_GCC_VER = $(shell find `brew --prefix`/bin/gcc* | grep -oE '[[:digit:]]+' | sort -n | uniq | tail -1)
+    TOOLS_CC := gcc-$(OSX_GCC_VER)
+    TOOLS_CXX := g++-$(OSX_GCC_VER)
+    CPP := cpp-$(OSX_GCC_VER) -P
+    PLATFORM_CFLAGS := -I $(shell brew --prefix)/include
+    PLATFORM_LDFLAGS := -L $(shell brew --prefix)/lib
+  else
+    $(error No suitable macOS toolchain found, have you installed Homebrew?)
+  endif
 endif
 
 # VERSION - selects the version of the game to build
@@ -361,7 +391,7 @@ endif
 # Check for certain target types.
 
 ifeq ($(TARGET_RPI),1) # Define RPi to change SDL2 title & GLES2 hints
-     DEFINES += USE_GLES=1
+  DEFINES += USE_GLES=1
 endif
 
 ifeq ($(TARGET_RK3588),1) # Define RK3588 to change SDL2 title & GLES2 hints
@@ -369,7 +399,11 @@ ifeq ($(TARGET_RK3588),1) # Define RK3588 to change SDL2 title & GLES2 hints
 endif
 
 ifeq ($(OSX_BUILD),1) # Modify GFX & SDL2 for OSX GL
-     DEFINES += OSX_BUILD=1
+  DEFINES += OSX_BUILD=1
+endif
+
+ifeq ($(TARGET_IOS),1)
+  VERSION_CFLAGS += IOS_BUILD=1
 endif
 
 # Check backends
@@ -463,7 +497,8 @@ PYTHON := python3
 ifeq ($(filter clean distclean print-%,$(MAKECMDGOALS)),)
   ifeq ($(WINDOWS_AUTO_BUILDER),0)
     $(info Building tools...)
-    DUMMY != $(MAKE) -C $(TOOLS_DIR) >&2 || echo FAIL
+#     DUMMY != $(MAKE) -C $(TOOLS_DIR) >&2 || echo FAIL
+    DUMMY != CC=$(TOOLS_CC) CXX=$(TOOLS_CXX) $(MAKE) -C tools -j1 >&2 || echo FAIL
       ifeq ($(DUMMY),FAIL)
         $(error Failed to build tools)
       endif
@@ -516,10 +551,17 @@ SRC_DIRS := src src/engine src/game src/audio src/menu src/buffers actors levels
 BIN_DIRS := bin bin/$(VERSION)
 
 # PC files
-SRC_DIRS += src/pc src/pc/gfx src/pc/audio src/pc/controller src/pc/fs src/pc/fs/packtypes src/pc/mods src/pc/dev src/pc/network src/pc/network/packets src/pc/network/socket src/pc/network/coopnet src/pc/utils src/pc/utils/miniz src/pc/djui src/pc/lua src/pc/lua/utils src/pc/os
+SRC_DIRS += src/pc src/pc/gfx src/pc/audio src/pc/controller src/pc/fs src/pc/fs/packtypes src/ios src/pc/mods src/pc/dev src/pc/network src/pc/network/packets src/pc/network/socket src/pc/network/coopnet src/pc/utils src/pc/utils/miniz src/pc/djui src/pc/lua src/pc/lua/utils src/pc/os
 
 ifeq ($(DISCORD_SDK),1)
   SRC_DIRS += src/pc/discord
+endif
+
+ifdef TARGET_OS_IOS
+  SRC_DIRS += src/ios/ios
+endif
+ifdef TARGET_OS_TV
+  SRC_DIRS += src/ios/tvos
 endif
 
 SRC_DIRS += src/pc/mumble
@@ -538,10 +580,12 @@ include dynos.mk
 # Source code files
 LEVEL_C_FILES     := $(wildcard levels/*/leveldata.c) $(wildcard levels/*/script.c) $(wildcard levels/*/geo.c)
 C_FILES           := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) $(LEVEL_C_FILES)
+M_FILES           := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.m))
 CPP_FILES         := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.cpp))
 S_FILES           := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.s))
 ULTRA_C_FILES     := $(foreach dir,$(ULTRA_SRC_DIRS),$(wildcard $(dir)/*.c))
 GODDARD_C_FILES   := $(foreach dir,$(GODDARD_SRC_DIRS),$(wildcard $(dir)/*.c))
+STORYBOARD_FILES  := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.storyboard))
 ULTRA_S_FILES     := $(foreach dir,$(ULTRA_SRC_DIRS),$(wildcard $(dir)/*.s))
 GENERATED_C_FILES := $(BUILD_DIR)/assets/mario_anim_data.c $(BUILD_DIR)/assets/demo_data.c
 
@@ -583,6 +627,7 @@ SOUND_SEQUENCE_FILES := \
 
 # Object files
 O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
+           $(foreach file,$(M_FILES),$(BUILD_DIR)/$(file:.m=.o)) \
            $(foreach file,$(CPP_FILES),$(BUILD_DIR)/$(file:.cpp=.o)) \
            $(foreach file,$(S_FILES),$(BUILD_DIR)/$(file:.s=.o)) \
            $(foreach file,$(GENERATED_C_FILES),$(file:.c=.o))
@@ -695,12 +740,12 @@ ifeq ($(WINDOWS_BUILD),1) # fixes compilation in MXE on Linux and WSL
   OBJCOPY := objcopy
   OBJDUMP := $(CROSS)objdump
 else ifeq ($(OSX_BUILD),1)
-  OSX_GCC_VER = $(shell find $(BREW_PREFIX)/bin/gcc* | grep -oE '[[:digit:]]+' | sort -n | uniq | tail -1)
-  # if we couldn't find a gcc ver, default to 9
-  ifeq ($(OSX_GCC_VER),)
-    OSX_GCC_VER = 9
-  endif
-  CPP := cpp-$(OSX_GCC_VER) -P
+#   OSX_GCC_VER = $(shell find $(BREW_PREFIX)/bin/gcc* | grep -oE '[[:digit:]]+' | sort -n | uniq | tail -1)
+#   # if we couldn't find a gcc ver, default to 9
+#   ifeq ($(OSX_GCC_VER),)
+#     OSX_GCC_VER = 9
+#   endif
+  CPP := cpp-12 -P
   OBJDUMP := i686-w64-mingw32-objdump
   OBJCOPY := i686-w64-mingw32-objcopy
 else ifeq ($(TARGET_N64),0) # Linux & other builds
@@ -779,6 +824,14 @@ else ifeq ($(findstring SDL,$(WINDOW_API)),SDL)
     BACKEND_LDFLAGS += -lglew32 -lglu32 -lopengl32
   else ifeq ($(TARGET_RPI),1)
     BACKEND_LDFLAGS += -lGLESv2
+  else ifeq ($(TARGET_IOS),1)
+	  ifeq ($(TARGET_OS_IOS),1)
+      BACKEND_LDFLAGS += -framework OpenGLES -framework AVFoundation -framework AudioToolbox -framework CoreFoundation -framework CoreGraphics -framework CoreBluetooth -framework CoreAudio -framework IOKit -framework GameController -framework Foundation -framework UIKit -framework QuartzCore -framework CoreMotion -framework CoreHaptics -framework Metal -L. -lSDL2 -lc++ -lstdc++ -D.
+      BACKEND_CFLAGS += -DTARGET_OS_IOS
+    else
+      BACKEND_LDFLAGS += -framework OpenGLES -framework AVFoundation -framework AudioToolbox -framework CoreFoundation -framework CoreGraphics -framework CoreBluetooth -framework CoreAudio -framework GameController -framework Foundation -framework UIKit -framework QuartzCore -framework CoreHaptics -framework Metal -L. -lSDL2 -lc++ -lstdc++ -D.
+      BACKEND_CFLAGS += -DTARGET_OS_TV
+    endif
   else ifeq ($(TARGET_RK3588),1)
     BACKEND_LDFLAGS += -lGLESv2
   else ifeq ($(OSX_BUILD),1)
@@ -818,6 +871,19 @@ else ifeq ($(SDL1_USED),1)
 endif
 
 ifneq ($(SDL1_USED)$(SDL2_USED),00)
+  ifeq ($(TARGET_IOS),1)
+  	BACKEND_CFLAGS += -I$(IOSINCLUDE)
+	  BACKEND_LDFLAGS += -L$(IOSLIBS)
+  else
+    BACKEND_CFLAGS += `$(SDLCONFIG) --cflags`
+
+    ifeq ($(WINDOWS_BUILD),1)
+      BACKEND_LDFLAGS += `$(SDLCONFIG) --static-libs` -lsetupapi -luser32 -limm32 -lole32 -loleaut32 -lshell32 -lwinmm -lversion
+    else
+      BACKEND_LDFLAGS += `$(SDLCONFIG) --libs`
+    endif
+  endif
+
   ifeq ($(OSX_BUILD),1)
     # on OSX at least the homebrew version of sdl-config gives include path as `.../include/SDL2` instead of `.../include`
     OSX_PREFIX := $(shell $(SDLCONFIG) --prefix)
@@ -893,7 +959,11 @@ else ifeq ($(TARGET_RK3588),1)
 else ifeq ($(OSX_BUILD),1)
   LDFLAGS := -lm $(BACKEND_LDFLAGS) -lpthread
 else
-  LDFLAGS := $(BITS) -march=$(TARGET_ARCH) -lm $(BACKEND_LDFLAGS) -no-pie -lpthread
+#   LDFLAGS := $(BITS) -march=$(TARGET_ARCH) -lm $(BACKEND_LDFLAGS) -no-pie -lpthread
+  LDFLAGS := $(BITS) -march=$(TARGET_ARCH) -lm $(BACKEND_LDFLAGS) -lpthread -ldl
+  ifeq ($(NO_PIE), 1)
+    LDFLAGS += -no-pie
+  endif
 endif
 
 # used by crash handler and loading screen on linux
@@ -948,10 +1018,14 @@ ifeq ($(WINDOWS_BUILD),1)
     LDFLAGS += -Llib/lua/win64 -l:liblua53.a
   endif
 else ifeq ($(OSX_BUILD),1)
-  ifeq ($(shell uname -m),arm64)
-    LDFLAGS += -L./lib/lua/mac_arm/ -l lua53
+  ifeq ($(IOS_BUILD),1)
+    LDFLAGS += -L./lib/lua/ios/ -l lua53
   else
-    LDFLAGS += -L./lib/lua/mac_intel/ -l lua53
+    ifeq ($(shell uname -m),arm64)
+      LDFLAGS += -L./lib/lua/mac_arm/ -l lua53
+    else
+      LDFLAGS += -L./lib/lua/mac_intel/ -l lua53
+    endif
   endif
 else ifeq ($(TARGET_RPI),1)
 	ifneq (,$(findstring aarch64,$(machine)))
@@ -1151,6 +1225,8 @@ LOADER = loader64
 LOADER_FLAGS = -vwf
 SHA1SUM = sha1sum
 PRINT = printf
+IBTOOL = ibtool
+CODESIGN = codesign
 
 ifeq ($(COLOR),1)
   NO_COL  := \033[0m
@@ -1177,6 +1253,10 @@ endef
 
 #all: $(ROM)
 all: $(EXE)
+
+ifeq ($(TARGET_IOS),1)
+	@for storyboard_path in ${STORYBOARD_FILES}; do ${IBTOOL} $${storyboard_path} --compilation-directory ${BUILD_DIR}/Base.lproj; done
+endif
 
 ifeq ($(WINDOWS_BUILD),1)
 MAPFILE = $(BUILD_DIR)/coop.map
@@ -1207,6 +1287,25 @@ load: $(ROM)
 	$(LOADER) $(LOADER_FLAGS) $<
 
 libultra: $(BUILD_DIR)/libultra.a
+
+ios: default
+	$(RM) -rf $(BUILD_DIR_BASE)/$(TARGET).app
+	cp -a ios/. $(BUILD_DIR)
+	cp -a sm64ios/sm64ios/Assets.xcassets $(BUILD_DIR)/Assets.xcassets
+	cp -R $(BUILD_DIR) build/$(TARGET).app
+	$(RM) -rf $(BUILD_DIR_BASE)/Payload
+	$(RM) -rf $(BUILD_DIR_BASE)/$(TARGET).ipa
+	mkdir $(BUILD_DIR_BASE)/Payload
+	cp -r $(BUILD_DIR_BASE)/$(TARGET).app $(BUILD_DIR_BASE)/Payload
+	$(CODESIGN) -f -s "$(CODE_SIGN_IDENTITY)" --entitlements "$(CODE_SIGN_ENTITLEMENTS)" $(BUILD_DIR_BASE)/Payload/$(TARGET).app
+	cd $(BUILD_DIR_BASE) && zip -r -q $(TARGET).ipa Payload && cd ..
+	$(RM) -rf $(BUILD_DIR_BASE)/Payload
+	$(RM) -rf $(BUILD_DIR_BASE)/$(TARGET).app
+
+sim: default
+	$(RM) -rf $(BUILD_DIR_BASE)/$(TARGET).app
+	cp -a ios/. $(BUILD_DIR)
+	cp -R $(BUILD_DIR) build/$(TARGET).app
 
 $(BUILD_DIR)/$(RPC_LIBS):
 	@$(CP) -f $(RPC_LIBS) $(BUILD_DIR)
@@ -1459,6 +1558,10 @@ $(BUILD_DIR)/%.o: $(BUILD_DIR)/%.c
 	$(V)$(CC_CHECK) $(PROF_FLAGS) $(CC_CHECK_CFLAGS) -MMD -MP -MT $@ -MF $(BUILD_DIR)/$*.d $<
 	$(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<
 
+$(BUILD_DIR)/%.o: %.c
+	$(call print,Compiling:,$<,$@)
+	$(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<
+
 # Alternate compiler flags needed for matching
 ifeq ($(COMPILER),ido)
   $(BUILD_DIR)/levels/%/leveldata.o: OPT_FLAGS := -g
@@ -1570,7 +1673,7 @@ else
 	$(V)$(LD) $(PROF_FLAGS) -L $(BUILD_DIR) -o $@ $(O_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 endif
 
-.PHONY: all clean distclean default diff test load libultra res
+.PHONY: all clean distclean default diff test load libultra res ios sim
 .PRECIOUS: $(BUILD_DIR)/bin/%.elf $(SOUND_BIN_DIR)/%.ctl $(SOUND_BIN_DIR)/%.tbl $(SOUND_SAMPLE_TABLES) $(SOUND_BIN_DIR)/%.s $(BUILD_DIR)/%
 # with no prerequisites, .SECONDARY causes no intermediate target to be removed
 .SECONDARY:

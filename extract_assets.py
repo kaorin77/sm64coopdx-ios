@@ -161,8 +161,11 @@ def main():
             sys.exit(1)
 
     # Make sure tools exist
+    osx_gcc_ver = subprocess.run("find `brew --prefix`/bin/gcc* | grep -oE '[[:digit:]]+' | sort -n | uniq | tail -1", stdout=subprocess.PIPE, shell=True).stdout.decode("utf-8").strip()
+
     subprocess.check_call(
-        ["make", "-s", "-C", "tools/", "n64graphics", "skyconv", "mio0", "aifc_decode"]
+        # ["make", "-s", "-C", "tools/", "n64graphics", "skyconv", "mio0", "aifc_decode"]
+        ["gmake", "-s", "-C", "tools/", "CC=gcc-" + osx_gcc_ver, "CXX=g++-" + osx_gcc_ver, "n64graphics", "skyconv", "mio0", "aifc_decode"]
     )
 
     # Go through the assets in roughly alphabetical order (but assets in the same

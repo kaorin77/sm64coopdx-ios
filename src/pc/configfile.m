@@ -210,6 +210,11 @@ unsigned int configRulesVersion                   = 0;
 bool         configCompressOnStartup              = false;
 bool         configSkipPackGeneration             = false;
 
+// ios port
+unsigned int configTouchMode     = 2;
+bool         configHaptics       = true;
+unsigned int configTouchUiScale  = 100;
+
 // secrets
 bool configExCoopTheme = false;
 
@@ -362,6 +367,11 @@ static const struct ConfigOption options[] = {
     {.name = "rules_version",                  .type = CONFIG_TYPE_UINT,   .uintValue   = &configRulesVersion},
     {.name = "compress_on_startup",            .type = CONFIG_TYPE_BOOL,   .boolValue   = &configCompressOnStartup},
     {.name = "skip_pack_generation",           .type = CONFIG_TYPE_BOOL,   .boolValue   = &configSkipPackGeneration},
+
+    // ios port
+    {.name = "touch_controls_mode",            .type = CONFIG_TYPE_UINT,   .uintValue   = &configTouchMode},
+    {.name = "haptics",                        .type = CONFIG_TYPE_BOOL,   .boolValue   = &configHaptics},
+    {.name = "touch_ui_scale",                 .type = CONFIG_TYPE_UINT,   .boolValue   = &configTouchUiScale},
 };
 
 struct SecretConfigOption {

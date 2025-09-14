@@ -63,6 +63,7 @@ struct Controller *gPlayer3Controller = &gControllers[2];
 struct DemoInput *gCurrDemoInput = NULL; // demo input sequence
 u16 gDemoInputListID = 0;
 struct DemoInput gRecordedDemoInput = { 0 }; // possibly removed in EU. TODO: Check
+bool simulatedStartFlag = false;
 
 /**
  * Initializes the Reality Display Processor (RDP).
@@ -464,6 +465,11 @@ void read_controller_inputs(void) {
     if (gControllerBits) {
         osRecvMesg(&gSIEventMesgQueue, &D_80339BEC, OS_MESG_BLOCK);
         osContGetReadData(gInteractableOverridePad ? &gInteractablePad : &gControllerPads[0]);
+
+        if (simulatedStartFlag)[
+            simulatedStartFlag = false
+            gControllerPads[0].button |= START_BUTTON;
+        ]
     }
     run_demo_inputs();
 
@@ -520,6 +526,10 @@ void read_controller_inputs(void) {
         mouse_scroll_x = 0;
         mouse_scroll_y = 0;
     }
+}
+
+void simulate_start_button_press(void) {
+    simulatedStartFlag = true;
 }
 
 // initialize the controller structs to point at the OSCont information.

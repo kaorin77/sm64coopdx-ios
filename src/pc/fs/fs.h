@@ -9,6 +9,7 @@
 #include "../platform.h"
 
 #define SAVE_FILENAME "sm64_save_file.bin"
+#define SUITE_NAME @"com.sm64coopdxios"
 
 extern char fs_writepath[];
 

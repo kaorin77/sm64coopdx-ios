@@ -1136,6 +1136,8 @@ static void (*LevelScriptJumpTable[])(void) = {
     /*42*/ level_cmd_jump_area_ext,
 };
 
+extern void render_touch_controls(void);
+
 struct LevelCommand *level_script_execute(struct LevelCommand *cmd) {
     sScriptStatus = SCRIPT_RUNNING;
     sCurrentCmd = cmd;
@@ -1157,6 +1159,7 @@ struct LevelCommand *level_script_execute(struct LevelCommand *cmd) {
     profiler_log_thread5_time(LEVEL_SCRIPT_EXECUTE);
     init_render_image();
     render_game();
+    render_touch_controls();
     end_master_display_list();
     alloc_display_list(0);
 

@@ -20,17 +20,28 @@
 #include <SDL2/SDL.h>
 #define GL_GLEXT_PROTOTYPES 1
 
-#ifdef OSX_BUILD
-#include <SDL2/SDL_opengl.h>
-#else
+// #ifdef OSX_BUILD
+// #include <SDL2/SDL_opengl.h>
+// #else
 #include <SDL2/SDL_opengles2.h>
-#endif
+// #endif
 
 #endif // End of OS-Specific GL defines
 
 #include <stdio.h>
 #include <unistd.h>
 
+#include <Foundation/Foundation.h>
+
+#include "gfx_sdl.h"
+
+
+#include <SDL2/SDL_syswm.h>
+#include <SDL2/SDL_video.h>
+
+#include "gfx_uikit.h"
+
+#include "src/pc/controller/controller_api.h"
 #include "gfx_window_manager_api.h"
 #include "gfx_screen_config.h"
 #include "../pc_main.h"
@@ -43,6 +54,9 @@
 #include "pc/utils/misc.h"
 #include "pc/mods/mod_import.h"
 #include "pc/rom_checker.h"
+
+#include "src/pc/controller/controller_touchscreen.h"
+#import "src/ios/FrameController.h"
 
 #ifndef GL_MAX_SAMPLES
 #define GL_MAX_SAMPLES 0x8D57
@@ -64,9 +78,36 @@ static void (*kb_all_keys_up)(void) = NULL;
 static void (*kb_text_input)(char*) = NULL;
 static void (*kb_text_editing)(char*, int) = NULL;
 
+static void (*touch_down_callback)(void* event);
+static void (*touch_motion_callback)(void* event);
+static void (*touch_up_callback)(void* event);
+
+// GetPerformanceFrequency
+static double perf_freq = 0.0;
+
 static void (*m_scroll)(float, float) = NULL;
 
 #define IS_FULLSCREEN() ((SDL_GetWindowFlags(wnd) & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
+
+// Bad don't do this
+@interface SDL_uikitviewcontroller : UIViewController
+
+@end
+
+@implementation SDL_uikitviewcontroller (SDL_uikitviewcontroller_Extensions)
+- (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
+    return UIRectEdgeBottom;
+}
+@end
+
+UIViewController *get_sdl_viewcontroller() {
+    SDL_SysWMinfo systemWindowInfo;
+    SDL_VERSION(&systemWindowInfo.version);
+    SDL_GetWindowWMInfo(wnd, &systemWindowInfo);
+    
+    UIWindow *uiWindow = systemWindowInfo.info.uikit.window;
+    return uiWindow.rootViewController;
+}
 
 static inline void gfx_sdl_set_vsync(const bool enabled) {
     SDL_GL_SetSwapInterval(enabled);
@@ -86,6 +127,10 @@ static void gfx_sdl_set_fullscreen(void) {
     }
 }
 
+void gfx_sdl_swap_buffer(void) {
+    SDL_GL_SwapWindow(wnd);
+}
+
 static void gfx_sdl_reset_dimension_and_pos(void) {
     if (configWindow.exiting_fullscreen) {
         configWindow.exiting_fullscreen = false;
@@ -95,8 +140,9 @@ static void gfx_sdl_reset_dimension_and_pos(void) {
     if (configWindow.reset) {
         configWindow.x = WAPI_WIN_CENTERPOS;
         configWindow.y = WAPI_WIN_CENTERPOS;
-        configWindow.w = DESIRED_SCREEN_WIDTH;
-        configWindow.h = DESIRED_SCREEN_HEIGHT;
+        // configWindow.w = DESIRED_SCREEN_WIDTH;
+        // configWindow.h = DESIRED_SCREEN_HEIGHT;
+        SDL_GL_GetDrawableSize(wnd, &configWindow.w, &configWindow.h);
         configWindow.reset = false;
     } else if (!configWindow.settings_changed) {
         return;
@@ -142,9 +188,13 @@ static void gfx_sdl_init(const char *window_title) {
     wnd = SDL_CreateWindow(
         window_title,
         xpos, ypos, configWindow.w, configWindow.h,
-        SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
+        // SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
+        SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_BORDERLESS | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_FULLSCREEN
     );
     ctx = SDL_GL_CreateContext(wnd);
+
+    SDL_GL_GetDrawableSize(wnd, &configWindow.w, &configWindow.h);
+    SDL_SetWindowSize(wnd, configWindow.w, configWindow.h);
 
     gfx_sdl_set_vsync(configWindow.vsync);
 
@@ -154,6 +204,9 @@ static void gfx_sdl_init(const char *window_title) {
     }
 
     controller_bind_init();
+
+    [frameController.onScreenRefresh addObject:[NSValue valueWithPointer:gfx_sdl_swap_buffer]];
+    SDL_RaiseWindow(wnd);
 }
 
 static void gfx_sdl_main_loop(void (*run_one_game_iter)(void)) {
@@ -209,6 +262,36 @@ static void gfx_sdl_ondropfile(char* path) {
 #endif
 }
 
+static void gfx_sdl_fingerdown(SDL_TouchFingerEvent sdl_event) {
+    struct TouchEvent event;
+    event.x = sdl_event.x;
+    event.y = sdl_event.y;
+    event.touchID = sdl_event.fingerId + 1;
+    if (touch_down_callback != NULL) {
+        touch_down_callback((void*)&event);
+    }
+}
+
+static void gfx_sdl_fingermotion(SDL_TouchFingerEvent sdl_event) {
+    struct TouchEvent event;
+    event.x = sdl_event.x;
+    event.y = sdl_event.y;
+    event.touchID = sdl_event.fingerId + 1;
+    if (touch_motion_callback != NULL) {
+        touch_motion_callback((void*)&event);
+    }
+}
+
+static void gfx_sdl_fingerup(SDL_TouchFingerEvent sdl_event) {
+    struct TouchEvent event;
+    event.x = sdl_event.x;
+    event.y = sdl_event.y;
+    event.touchID = sdl_event.fingerId + 1;
+    if (touch_up_callback != NULL) {
+        touch_up_callback((void*)&event);
+    }
+}
+
 static void gfx_sdl_handle_events(void) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -228,6 +311,23 @@ static void gfx_sdl_handle_events(void) {
             case SDL_MOUSEWHEEL:
                 gfx_sdl_onscroll(event.wheel.preciseX, event.wheel.preciseY);
                 break;
+            case SDL_APP_WILLENTERBACKGROUND:
+                paused_by_menu = true;
+                frameController.gfxDisplayLink.paused = true;
+                break;
+            case SDL_APP_DIDENTERFOREGROUND:
+                paused_by_menu = false;
+                frameController.gfxDisplayLink.paused = false;
+                break;
+            case SDL_FINGERDOWN:
+                gfx_sdl_fingerdown(event.tfinger);
+                break;
+            case SDL_FINGERMOTION:
+                gfx_sdl_fingermotion(event.tfinger);
+                break;
+            case SDL_FINGERUP:
+                gfx_sdl_fingerup(event.tfinger);
+                break;
             case SDL_WINDOWEVENT:
                 if (!IS_FULLSCREEN()) {
                     switch (event.window.event) {
@@ -242,6 +342,30 @@ static void gfx_sdl_handle_events(void) {
                             configWindow.h = event.window.data2;
                             break;
                     }
+                }
+                break; // if it will not work, i should try uncommenting this idk
+            // case SDL_WINDOWEVENT_RESTORED:
+            //     SDL_GL_GetDrawableSize(wnd, &configWindow.w, &configWindow.h);
+            //     SDL_SetWindowSize(wnd, configWindow.w, configWindow.h);
+            //     break;
+            // case SDL_WINDOWEVENT_SHOWN:
+            //     SDL_GL_GetDrawableSize(wnd, &configWindow.w, &configWindow.h);
+            //     SDL_SetWindowSize(wnd, configWindow.w, configWindow.h);
+            //     break;
+            // case SDL_WINDOWEVENT_RESIZED:
+            //     SDL_GL_GetDrawableSize(wnd, &configWindow.w, &configWindow.h);
+            //     SDL_SetWindowSize(wnd, configWindow.w, configWindow.h);
+            //     //SDL_SetWindowFullscreen(wnd, SDL_WINDOW_FULLSCREEN_DESKTOP);
+            case SDL_DISPLAYEVENT:
+                switch(event.display.event) {
+                    case SDL_DISPLAYEVENT_CONNECTED:
+                        if([[UIScreen screens] count] > 1) {
+                            setup_external_screen();
+                        }
+                        break;
+                    case SDL_DISPLAYEVENT_DISCONNECTED:
+                        teardown_external_screen();
+                        break;
                 }
                 break;
             case SDL_DROPFILE:
@@ -270,6 +394,12 @@ void (*on_all_keys_up)(void), void (*on_text_input)(char*), void (*on_text_editi
     kb_text_editing = on_text_editing;
 }
 
+static void gfx_sdl_set_touchscreen_callbacks(void (*down)(void* event), void (*motion)(void* event), void (*up)(void* event)) {
+    touch_down_callback = down;
+    touch_motion_callback = motion;
+    touch_up_callback = up;
+}
+
 static void gfx_sdl_set_scroll_callback(void (*on_scroll)(float, float)) {
     m_scroll = on_scroll;
 }
@@ -279,7 +409,8 @@ static bool gfx_sdl_start_frame(void) {
 }
 
 static void gfx_sdl_swap_buffers_begin(void) {
-    SDL_GL_SwapWindow(wnd);
+    // ANOTHER IOS THING!
+    // SDL_GL_SwapWindow(wnd);
 }
 
 static void gfx_sdl_swap_buffers_end(void) {
@@ -340,6 +471,7 @@ static void gfx_sdl_set_cursor_visible(bool visible) { SDL_ShowCursor(visible ? 
 struct GfxWindowManagerAPI gfx_sdl = {
     gfx_sdl_init,
     gfx_sdl_set_keyboard_callbacks,
+    gfx_sdl_set_touchscreen_callbacks,
     gfx_sdl_set_scroll_callback,
     gfx_sdl_main_loop,
     gfx_sdl_get_dimensions,
@@ -358,7 +490,8 @@ struct GfxWindowManagerAPI gfx_sdl = {
     gfx_sdl_get_max_msaa,
     gfx_sdl_set_window_title,
     gfx_sdl_reset_window_title,
-    gfx_sdl_has_focus
+    gfx_sdl_has_focus,
+    gfx_sdl_reset_dimension_and_pos
 };
 
 #endif // BACKEND_WM

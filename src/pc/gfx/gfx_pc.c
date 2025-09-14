@@ -1863,6 +1863,7 @@ void gfx_start_frame(void) {
         rdp.loaded_texture[1].addr = NULL;
         rdp.loaded_texture[1].size_bytes = 0;
     }
+    // ios port deleted this line so i should do it too (probably)
     gfx_wapi->handle_events();
     gfx_wapi->get_dimensions(&gfx_current_dimensions.width, &gfx_current_dimensions.height);
     if (gfx_current_dimensions.height == 0) {

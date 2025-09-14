@@ -17,6 +17,7 @@ static struct ControllerAPI *controller_implementations[] = {
     &controller_sdl,
 #endif
     &controller_keyboard,
+    &controller_touchscreen,
 };
 
 s32 osContInit(UNUSED OSMesgQueue *mq, u8 *controllerBits, UNUSED OSContStatus *status) {

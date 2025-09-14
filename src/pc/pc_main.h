@@ -76,6 +76,8 @@ void produce_one_dummy_frame(void (*callback)(), u8 clearColorR, u8 clearColorG,
 void game_deinit(void);
 void game_exit(void);
 
+void main_func(void);
+
 #ifdef __cplusplus
 }
 #endif

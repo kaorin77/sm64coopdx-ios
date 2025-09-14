@@ -164,6 +164,11 @@ extern unsigned int configRulesVersion;
 extern bool         configCompressOnStartup;
 extern bool         configSkipPackGeneration;
 
+// ios port
+extern unsigned int configTouchMode;
+extern bool         configHaptics;
+extern unsigned int configTouchUiScale;
+
 // secrets
 extern bool configExCoopTheme;
 

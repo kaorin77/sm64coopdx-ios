@@ -5,6 +5,12 @@
 #include "platform.h"
 #include "fs/fs.h"
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_TV
+NSUserDefaults *defaults;
+#endif
+
 u8* gOverrideEeprom = NULL;
 
 extern OSMgrArgs piMgrArgs;
