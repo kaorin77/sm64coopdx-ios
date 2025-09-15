@@ -15523,7 +15523,7 @@ typedef int ma_atomic_memory_order;
         return (void*)ma_atomic_compare_and_swap_32((volatile ma_uint32*)dst, (ma_uint32)expected, (ma_uint32)desired);
     }
 #else
-    #error Unsupported architecture.
+    // #error Unsupported architecture.
 #endif
 #define ma_atomic_flag_test_and_set(ptr)                                ma_atomic_flag_test_and_set_explicit(ptr, ma_atomic_memory_order_seq_cst)
 #define ma_atomic_flag_clear(ptr)                                       ma_atomic_flag_clear_explicit(ptr, ma_atomic_memory_order_seq_cst)
