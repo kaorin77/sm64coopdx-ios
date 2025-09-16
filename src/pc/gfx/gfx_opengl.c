@@ -43,6 +43,11 @@
 
 #define TEX_CACHE_STEP 512
 
+#define glGenVertexArrays  glGenVertexArraysOES
+#define glBindVertexArray  glBindVertexArrayOES
+#define glDeleteVertexArrays glDeleteVertexArraysOES
+#define glIsVertexArray glIsVertexArrayOES
+
 struct ShaderProgram {
     uint64_t hash;
     GLuint opengl_program_id;

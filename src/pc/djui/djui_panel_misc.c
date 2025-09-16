@@ -12,22 +12,22 @@
 #include <windows.h>
 #endif
 
-static void djui_panel_options_open_user_folder(UNUSED struct DjuiBase* caller) {
-#if defined(_WIN32) || defined(_WIN64)
-    // Windows
-    ShellExecuteA(NULL, "open", fs_get_write_path(""), NULL, NULL, SW_SHOWNORMAL);
-#elif __linux__
-    // Linux
-    char command[512];
-    snprintf(command, sizeof(command), "xdg-open \"%s\"", fs_get_write_path(""));
-    system(command);
-#elif __APPLE__
-    // macOS
-    char command[512];
-    snprintf(command, sizeof(command), "open \"%s\"", fs_get_write_path(""));
-    system(command);
-#endif
-}
+//static void djui_panel_options_open_user_folder(UNUSED struct DjuiBase* caller) {
+//#if defined(_WIN32) || defined(_WIN64)
+//    // Windows
+//    ShellExecuteA(NULL, "open", fs_get_write_path(""), NULL, NULL, SW_SHOWNORMAL);
+//#elif __linux__
+//    // Linux
+//    char command[512];
+//    snprintf(command, sizeof(command), "xdg-open \"%s\"", fs_get_write_path(""));
+//    system(command);
+//#elif __APPLE__
+//    // macOS
+//    char command[512];
+//    snprintf(command, sizeof(command), "open \"%s\"", fs_get_write_path(""));
+//    system(command);
+//#endif
+//}
 
 #ifdef DEVELOPMENT
 void djui_panel_options_debug_create(struct DjuiBase* caller) {

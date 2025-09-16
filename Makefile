@@ -77,7 +77,7 @@ else
   MIN_MACOS_VERSION ?= 10.15
 endif
 # Make some small adjustments for handheld devices
-HANDHELD ?= 0
+HANDHELD ?= 1
 
 # Various workarounds for weird toolchains
 NO_BZERO_BCOPY ?= 0
@@ -109,7 +109,7 @@ dev:; @$(MAKE) DEVELOPMENT=1
 
 # COMPILER - selects the C compiler to use
 #   gcc - uses the GNU C Compiler
-COMPILER = gcc
+COMPILER = clang
 $(eval $(call validate-option,COMPILER,ido gcc clang))
 
 # Attempt to detect OS
@@ -217,8 +217,8 @@ ifeq ($(HOST_OS),Darwin)
   ifeq ($(shell which brew >/dev/null 2>&1 && echo y),y)
     PLATFORM := $(shell uname -m)
     OSX_GCC_VER = $(shell find `brew --prefix`/bin/gcc* | grep -oE '[[:digit:]]+' | sort -n | uniq | tail -1)
-    TOOLS_CC := gcc-$(OSX_GCC_VER)
-    TOOLS_CXX := g++-$(OSX_GCC_VER)
+    TOOLS_CC := gcc-12
+    TOOLS_CXX := g++-12
     CPP := cpp-$(OSX_GCC_VER) -P
     PLATFORM_CFLAGS := -I $(shell brew --prefix)/include
     PLATFORM_LDFLAGS := -L $(shell brew --prefix)/lib
@@ -498,7 +498,7 @@ ifeq ($(filter clean distclean print-%,$(MAKECMDGOALS)),)
   ifeq ($(WINDOWS_AUTO_BUILDER),0)
     $(info Building tools...)
 #     DUMMY != $(MAKE) -C $(TOOLS_DIR) >&2 || echo FAIL
-    DUMMY != CC=$(TOOLS_CC) CXX=$(TOOLS_CXX) $(MAKE) -C tools -j1 >&2 || echo FAIL
+	  DUMMY != CC=$(TOOLS_CC) CXX=$(TOOLS_CXX) $(MAKE) -C tools -j1 >&2 || echo FAIL
       ifeq ($(DUMMY),FAIL)
         $(error Failed to build tools)
       endif
@@ -709,6 +709,7 @@ ifeq ($(WINDOWS_AUTO_BUILDER),1)
   CC      := cc
   CXX     := g++
 else ifeq ($(COMPILER),gcc)
+  $(info Changed compiler to gcc)
   CC      := $(CROSS)gcc
   CXX     := $(CROSS)g++
   ifeq ($(OSX_BUILD),0)
@@ -717,11 +718,13 @@ else ifeq ($(COMPILER),gcc)
 	  EXTRA_CFLAGS += -Wno-unused-result -mmacosx-version-min=$(MIN_MACOS_VERSION)
   endif
 else ifeq ($(COMPILER),clang)
-  CC      := clang
-  CXX     := clang++
-  CPP     := clang++
+  $(info Changed compiler to clang)
+#  CC      := clang
+#  CXX     := clang++
+#  CPP     := clang++
   EXTRA_CFLAGS += -Wno-unused-function -Wno-unused-variable -Wno-unknown-warning-option -Wno-self-assign -Wno-unknown-pragmas -Wno-unused-result
 else
+  $(info Changed compiler els)
   ifeq ($(USE_QEMU_IRIX),1)
     IRIX_ROOT := $(TOOLS_DIR)/ido5.3_compiler
     CC      := $(QEMU_IRIX) -silent -L $(IRIX_ROOT) $(IRIX_ROOT)/usr/bin/cc
@@ -1007,7 +1010,9 @@ LDFLAGS += -lz
 ifeq ($(WINDOWS_BUILD),1)
   LDFLAGS += -lwininet
 else
-  LDFLAGS += -lcurl
+  CFLAGS += -I$(brew --prefix curl)/include
+  LDFLAGS += -L$(brew --prefix curl)/lib -lcurl
+#  LDFLAGS += -lcurl
 endif
 
 # Lua
@@ -1253,6 +1258,9 @@ endef
 
 #all: $(ROM)
 all: $(EXE)
+
+
+
 
 ifeq ($(TARGET_IOS),1)
 	@for storyboard_path in ${STORYBOARD_FILES}; do ${IBTOOL} $${storyboard_path} --compilation-directory ${BUILD_DIR}/Base.lproj; done
@@ -1550,15 +1558,18 @@ $(BUILD_DIR)/%.o: %.cpp
 
 # Compile C code
 $(BUILD_DIR)/%.o: %.c
+	$(info $(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<)
 	$(call print,Compiling:,$<,$@)
 	$(V)$(CC_CHECK) $(PROF_FLAGS) $(CC_CHECK_CFLAGS) -MMD -MP -MT $@ -MF $(BUILD_DIR)/$*.d $<
 	$(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<
 $(BUILD_DIR)/%.o: $(BUILD_DIR)/%.c
+	$(info $(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<)
 	$(call print,Compiling:,$<,$@)
 	$(V)$(CC_CHECK) $(PROF_FLAGS) $(CC_CHECK_CFLAGS) -MMD -MP -MT $@ -MF $(BUILD_DIR)/$*.d $<
 	$(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.c
+	$(info $(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<)
 	$(call print,Compiling:,$<,$@)
 	$(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<
 

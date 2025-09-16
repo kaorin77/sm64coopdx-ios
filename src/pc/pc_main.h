@@ -11,7 +11,9 @@ extern "C" {
 #include "gfx/gfx_direct3d11.h"
 
 #include "gfx/gfx_dxgi.h"
+#ifndef __OBJC__
 #include "gfx/gfx_sdl.h"
+#endif
 #include "gfx/gfx_dummy.h"
 
 #if defined(WAPI_SDL1) || defined(WAPI_SDL2)

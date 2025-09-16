@@ -1,7 +1,7 @@
 #ifndef SMLUA_AUDIO_UTILS_H
 #define SMLUA_AUDIO_UTILS_H
 
-#include "pc/utils/miniaudio.h"
+//#include "pc/utils/miniaudio.h"
 
 /* |description|Resets all custom sequences back to vanilla|descriptionEnd| */
 void smlua_audio_utils_reset_all(void);
@@ -14,8 +14,8 @@ void smlua_audio_utils_replace_sequence(u8 sequenceId, u8 bankId, u8 defaultVolu
 ////////////////
 
 struct ModAudioSampleCopies {
-    ma_sound sound;
-    ma_decoder decoder;
+//    ma_sound sound;
+//    ma_decoder decoder;
     struct ModAudioSampleCopies *next;
     struct ModAudioSampleCopies *prev;
     struct ModAudio *parent;
@@ -23,8 +23,8 @@ struct ModAudioSampleCopies {
 
 struct ModAudio {
     struct ModFile* file;
-    ma_sound sound;
-    ma_decoder decoder;
+//    ma_sound sound;
+//    ma_decoder decoder;
     void *buffer;
     u32 bufferSize;
     struct ModAudioSampleCopies* sampleCopiesTail;

@@ -2,11 +2,16 @@
 #define GFX_SDL_H
 
 #include "gfx_window_manager_api.h"
+
+#ifdef __OBJC__
 #include <Foundation/Foundation.h>
 #include <UIKit/UIKit.h>
+#endif
 
 extern struct GfxWindowManagerAPI gfx_sdl;
-UIViewController *get_sdl_viewcontroller()
-static SDL_Window *wnd
+#ifdef __OBJC__
+UIViewController *get_sdl_viewcontroller();
+#endif
+static SDL_Window *wnd;
 
 #endif
