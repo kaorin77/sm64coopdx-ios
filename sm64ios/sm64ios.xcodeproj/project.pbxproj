@@ -17,6 +17,10 @@
 		93CAAA442E7843C600D82AF6 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA422E7843C600D82AF6 /* include */; };
 		93CAAA492E79B1ED00D82AF6 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA482E79B1ED00D82AF6 /* levels */; };
 		93CAAA4A2E79B1ED00D82AF6 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA482E79B1ED00D82AF6 /* levels */; };
+		93CAAAA12E915EA500D82AF6 /* util.mk in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA02E915EA500D82AF6 /* util.mk */; };
+		93CAAAA22E915EA500D82AF6 /* util.mk in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA02E915EA500D82AF6 /* util.mk */; };
+		93CAAAA42E915EBE00D82AF6 /* Makefile.split in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA32E915EBE00D82AF6 /* Makefile.split */; };
+		93CAAAA52E915EBE00D82AF6 /* Makefile.split in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA32E915EBE00D82AF6 /* Makefile.split */; };
 		93E3EB732E77EAE6009BA3BC /* src in Resources */ = {isa = PBXBuildFile; fileRef = 93E3EB722E77EAE5009BA3BC /* src */; };
 		93E3EB742E77EAE6009BA3BC /* src in Resources */ = {isa = PBXBuildFile; fileRef = 93E3EB722E77EAE5009BA3BC /* src */; };
 /* End PBXBuildFile section */
@@ -47,6 +51,9 @@
 		59EFE97027444086007AB508 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93CAAA422E7843C600D82AF6 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = include; path = ../include; sourceTree = "<group>"; };
 		93CAAA482E79B1ED00D82AF6 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../levels; sourceTree = "<group>"; };
+		93CAAA9F2E914FA400D82AF6 /* tools */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tools; path = ../tools; sourceTree = "<group>"; };
+		93CAAAA02E915EA500D82AF6 /* util.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = util.mk; path = ../util.mk; sourceTree = "<group>"; };
+		93CAAAA32E915EBE00D82AF6 /* Makefile.split */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Makefile.split; path = ../Makefile.split; sourceTree = "<group>"; };
 		93E3EB722E77EAE5009BA3BC /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../src; sourceTree = "<group>"; };
 		F3A497AB2555F0BD00E92A8B /* CoreHaptics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreHaptics.framework; path = System/Library/Frameworks/CoreHaptics.framework; sourceTree = SDKROOT; };
 		F3A497AF2555F0FF00E92A8B /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
@@ -105,6 +112,7 @@
 		29B97315FDCFA39411CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				93CAAA9F2E914FA400D82AF6 /* tools */,
 				93CAAA422E7843C600D82AF6 /* include */,
 				59A67E1F272AA49100FF5D6C /* .gitignore */,
 				93E3EB722E77EAE5009BA3BC /* src */,
@@ -112,6 +120,8 @@
 				59A67E1E272A94C400FF5D6C /* appicon.sh */,
 				93CAAA482E79B1ED00D82AF6 /* levels */,
 				59AA7BE22718FDB500B9AF30 /* build_ios.sh */,
+				93CAAAA02E915EA500D82AF6 /* util.mk */,
+				93CAAAA32E915EBE00D82AF6 /* Makefile.split */,
 				59AA7BE32718FDB500B9AF30 /* build_sim.sh */,
 				59AA7BE02718F94400B9AF30 /* Makefile */,
 			);
@@ -254,6 +264,8 @@
 			files = (
 				93CAAA432E7843C600D82AF6 /* include in Resources */,
 				93CAAA492E79B1ED00D82AF6 /* levels in Resources */,
+				93CAAAA42E915EBE00D82AF6 /* Makefile.split in Resources */,
+				93CAAAA12E915EA500D82AF6 /* util.mk in Resources */,
 				59A67E1D27275B5100FF5D6C /* Assets.xcassets in Resources */,
 				93E3EB732E77EAE6009BA3BC /* src in Resources */,
 			);
@@ -265,6 +277,8 @@
 			files = (
 				93CAAA442E7843C600D82AF6 /* include in Resources */,
 				93CAAA4A2E79B1ED00D82AF6 /* levels in Resources */,
+				93CAAAA52E915EBE00D82AF6 /* Makefile.split in Resources */,
+				93CAAAA22E915EA500D82AF6 /* util.mk in Resources */,
 				591E1CF6274048E9004DA542 /* Assets.xcassets in Resources */,
 				93E3EB742E77EAE6009BA3BC /* src in Resources */,
 			);

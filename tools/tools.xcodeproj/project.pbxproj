@@ -1,0 +1,286 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXFileReference section */
+		93CAAA512E914FA400D82AF6 /* check_matching_langs.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = check_matching_langs.py; sourceTree = "<group>"; };
+		93CAAA522E914FA400D82AF6 /* revert_patch.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = revert_patch.sh; sourceTree = "<group>"; };
+		93CAAA532E914FA400D82AF6 /* sdk-tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "sdk-tools"; sourceTree = "<group>"; };
+		93CAAA542E914FA400D82AF6 /* default_crcmap.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = default_crcmap.txt; sourceTree = "<group>"; };
+		93CAAA552E914FA400D82AF6 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		93CAAA562E914FA400D82AF6 /* tabledesign */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = tabledesign; sourceTree = "<group>"; };
+		93CAAA572E914FA400D82AF6 /* aifc_decode */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = aifc_decode; sourceTree = "<group>"; };
+		93CAAA582E914FA400D82AF6 /* n64graphics_ci_dir */ = {isa = PBXFileReference; lastKnownFileType = folder; path = n64graphics_ci_dir; sourceTree = "<group>"; };
+		93CAAA592E914FA400D82AF6 /* patch_libultra_math */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = patch_libultra_math; sourceTree = "<group>"; };
+		93CAAA5A2E914FA400D82AF6 /* rasm2armips.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = rasm2armips.py; sourceTree = "<group>"; };
+		93CAAA5B2E914FA400D82AF6 /* texrename.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = texrename.py; sourceTree = "<group>"; };
+		93CAAA5C2E914FA400D82AF6 /* copy_extended_sounds.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = copy_extended_sounds.py; sourceTree = "<group>"; };
+		93CAAA5D2E914FA400D82AF6 /* append_aiffc_table.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = append_aiffc_table.py; sourceTree = "<group>"; };
+		93CAAA5E2E914FA400D82AF6 /* n64cksum.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = n64cksum.c; sourceTree = "<group>"; };
+		93CAAA5F2E914FA400D82AF6 /* append_lang_keys.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = append_lang_keys.py; sourceTree = "<group>"; };
+		93CAAA602E914FA400D82AF6 /* mkzip.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = mkzip.py; sourceTree = "<group>"; };
+		93CAAA612E914FA400D82AF6 /* unpak.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = unpak.py; sourceTree = "<group>"; };
+		93CAAA622E914FA400D82AF6 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
+		93CAAA632E914FA400D82AF6 /* rice_crcmap.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = rice_crcmap.txt; sourceTree = "<group>"; };
+		93CAAA642E914FA400D82AF6 /* decompress.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = decompress.py; sourceTree = "<group>"; };
+		93CAAA652E914FA400D82AF6 /* cleancrcmap.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = cleancrcmap.py; sourceTree = "<group>"; };
+		93CAAA662E914FA400D82AF6 /* determine-endian-bitwidth.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "determine-endian-bitwidth.c"; sourceTree = "<group>"; };
+		93CAAA672E914FA400D82AF6 /* n64graphics_ci */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = n64graphics_ci; sourceTree = "<group>"; };
+		93CAAA682E914FA400D82AF6 /* util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = util; sourceTree = "<group>"; };
+		93CAAA692E914FA400D82AF6 /* gen_asset_list.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gen_asset_list.cpp; sourceTree = "<group>"; };
+		93CAAA6A2E914FA400D82AF6 /* demo_data_converter.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = demo_data_converter.py; sourceTree = "<group>"; };
+		93CAAA6B2E914FA400D82AF6 /* hashtable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hashtable.h; sourceTree = "<group>"; };
+		93CAAA6C2E914FA400D82AF6 /* libmio0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libmio0.h; sourceTree = "<group>"; };
+		93CAAA6D2E914FA400D82AF6 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		93CAAA6E2E914FA400D82AF6 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
+		93CAAA6F2E914FA400D82AF6 /* output_level_headers.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = output_level_headers.py; sourceTree = "<group>"; };
+		93CAAA702E914FA400D82AF6 /* n64cksum */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = n64cksum; sourceTree = "<group>"; };
+		93CAAA712E914FA400D82AF6 /* patch_libultra_math.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = patch_libultra_math.c; sourceTree = "<group>"; };
+		93CAAA722E914FA400D82AF6 /* n64graphics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = n64graphics.h; sourceTree = "<group>"; };
+		93CAAA732E914FA400D82AF6 /* mac-intel-essential.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "mac-intel-essential.sh"; sourceTree = "<group>"; };
+		93CAAA742E914FA400D82AF6 /* utf8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utf8.c; sourceTree = "<group>"; };
+		93CAAA752E914FA400D82AF6 /* skyconv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = skyconv.c; sourceTree = "<group>"; };
+		93CAAA762E914FA400D82AF6 /* patch_libmalloc.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = patch_libmalloc.py; sourceTree = "<group>"; };
+		93CAAA772E914FA400D82AF6 /* hash_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hash_file.cpp; sourceTree = "<group>"; };
+		93CAAA782E914FA400D82AF6 /* zeroterm.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = zeroterm.py; sourceTree = "<group>"; };
+		93CAAA792E914FA400D82AF6 /* skyconv */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = skyconv; sourceTree = "<group>"; };
+		93CAAA7A2E914FA400D82AF6 /* asm_processor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = asm_processor; sourceTree = "<group>"; };
+		93CAAA7B2E914FA400D82AF6 /* utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
+		93CAAA7C2E914FA400D82AF6 /* sm64tools.LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = sm64tools.LICENSE; sourceTree = "<group>"; };
+		93CAAA7D2E914FA400D82AF6 /* n64graphics */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = n64graphics; sourceTree = "<group>"; };
+		93CAAA7E2E914FA400D82AF6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		93CAAA7F2E914FA400D82AF6 /* extract_data_for_mio */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = extract_data_for_mio; sourceTree = "<group>"; };
+		93CAAA802E914FA400D82AF6 /* hashtable.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hashtable.c; sourceTree = "<group>"; };
+		93CAAA812E914FA400D82AF6 /* aifc_decode.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aifc_decode.c; sourceTree = "<group>"; };
+		93CAAA822E914FA400D82AF6 /* apply_patch.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = apply_patch.sh; sourceTree = "<group>"; };
+		93CAAA832E914FA400D82AF6 /* extract_data_for_mio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = extract_data_for_mio.c; sourceTree = "<group>"; };
+		93CAAA842E914FA400D82AF6 /* vadpcm_enc */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = vadpcm_enc; sourceTree = "<group>"; };
+		93CAAA852E914FA400D82AF6 /* convert_skybox.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = convert_skybox.py; sourceTree = "<group>"; };
+		93CAAA862E914FA400D82AF6 /* n64cksum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = n64cksum.h; sourceTree = "<group>"; };
+		93CAAA872E914FA400D82AF6 /* mario_anims_converter.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = mario_anims_converter.py; sourceTree = "<group>"; };
+		93CAAA882E914FA400D82AF6 /* aiff_extract_codebook */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = aiff_extract_codebook; sourceTree = "<group>"; };
+		93CAAA892E914FA400D82AF6 /* ido5.3_recomp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ido5.3_recomp; sourceTree = "<group>"; };
+		93CAAA8A2E914FA400D82AF6 /* clang-tidy.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "clang-tidy.sh"; sourceTree = "<group>"; };
+		93CAAA8B2E914FA400D82AF6 /* convert_cake.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = convert_cake.py; sourceTree = "<group>"; };
+		93CAAA8C2E914FA400D82AF6 /* mio0 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mio0; sourceTree = "<group>"; };
+		93CAAA8D2E914FA400D82AF6 /* ido5.3_compiler */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ido5.3_compiler; sourceTree = "<group>"; };
+		93CAAA8E2E914FA400D82AF6 /* calc_bss.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = calc_bss.sh; sourceTree = "<group>"; };
+		93CAAA8F2E914FA400D82AF6 /* clean_mapfile.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = clean_mapfile.py; sourceTree = "<group>"; };
+		93CAAA902E914FA400D82AF6 /* textconv */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = textconv; sourceTree = "<group>"; };
+		93CAAA912E914FA400D82AF6 /* libmio0.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = libmio0.c; sourceTree = "<group>"; };
+		93CAAA922E914FA400D82AF6 /* audiofile */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audiofile; sourceTree = "<group>"; };
+		93CAAA932E914FA400D82AF6 /* seq_decoder.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = seq_decoder.py; sourceTree = "<group>"; };
+		93CAAA942E914FA400D82AF6 /* disassemble_sound.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = disassemble_sound.py; sourceTree = "<group>"; };
+		93CAAA952E914FA400D82AF6 /* remove_built_in_mods.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = remove_built_in_mods.py; sourceTree = "<group>"; };
+		93CAAA962E914FA400D82AF6 /* utf8.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
+		93CAAA972E914FA400D82AF6 /* create_patch.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = create_patch.sh; sourceTree = "<group>"; };
+		93CAAA982E914FA400D82AF6 /* aiff_extract_codebook.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aiff_extract_codebook.c; sourceTree = "<group>"; };
+		93CAAA992E914FA400D82AF6 /* textconv.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = textconv.c; sourceTree = "<group>"; };
+		93CAAA9A2E914FA400D82AF6 /* n64graphics.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = n64graphics.c; sourceTree = "<group>"; };
+		93CAAA9B2E914FA400D82AF6 /* assemble_sound.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = assemble_sound.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		93CAAA4B2E914FA400D82AF6 = {
+			isa = PBXGroup;
+			children = (
+				93CAAA512E914FA400D82AF6 /* check_matching_langs.py */,
+				93CAAA522E914FA400D82AF6 /* revert_patch.sh */,
+				93CAAA532E914FA400D82AF6 /* sdk-tools */,
+				93CAAA542E914FA400D82AF6 /* default_crcmap.txt */,
+				93CAAA552E914FA400D82AF6 /* utils.h */,
+				93CAAA562E914FA400D82AF6 /* tabledesign */,
+				93CAAA572E914FA400D82AF6 /* aifc_decode */,
+				93CAAA582E914FA400D82AF6 /* n64graphics_ci_dir */,
+				93CAAA592E914FA400D82AF6 /* patch_libultra_math */,
+				93CAAA5A2E914FA400D82AF6 /* rasm2armips.py */,
+				93CAAA5B2E914FA400D82AF6 /* texrename.py */,
+				93CAAA5C2E914FA400D82AF6 /* copy_extended_sounds.py */,
+				93CAAA5D2E914FA400D82AF6 /* append_aiffc_table.py */,
+				93CAAA5E2E914FA400D82AF6 /* n64cksum.c */,
+				93CAAA5F2E914FA400D82AF6 /* append_lang_keys.py */,
+				93CAAA602E914FA400D82AF6 /* mkzip.py */,
+				93CAAA612E914FA400D82AF6 /* unpak.py */,
+				93CAAA622E914FA400D82AF6 /* .DS_Store */,
+				93CAAA632E914FA400D82AF6 /* rice_crcmap.txt */,
+				93CAAA642E914FA400D82AF6 /* decompress.py */,
+				93CAAA652E914FA400D82AF6 /* cleancrcmap.py */,
+				93CAAA662E914FA400D82AF6 /* determine-endian-bitwidth.c */,
+				93CAAA672E914FA400D82AF6 /* n64graphics_ci */,
+				93CAAA682E914FA400D82AF6 /* util */,
+				93CAAA692E914FA400D82AF6 /* gen_asset_list.cpp */,
+				93CAAA6A2E914FA400D82AF6 /* demo_data_converter.py */,
+				93CAAA6B2E914FA400D82AF6 /* hashtable.h */,
+				93CAAA6C2E914FA400D82AF6 /* libmio0.h */,
+				93CAAA6D2E914FA400D82AF6 /* Makefile */,
+				93CAAA6E2E914FA400D82AF6 /* include */,
+				93CAAA6F2E914FA400D82AF6 /* output_level_headers.py */,
+				93CAAA702E914FA400D82AF6 /* n64cksum */,
+				93CAAA712E914FA400D82AF6 /* patch_libultra_math.c */,
+				93CAAA722E914FA400D82AF6 /* n64graphics.h */,
+				93CAAA732E914FA400D82AF6 /* mac-intel-essential.sh */,
+				93CAAA742E914FA400D82AF6 /* utf8.c */,
+				93CAAA752E914FA400D82AF6 /* skyconv.c */,
+				93CAAA762E914FA400D82AF6 /* patch_libmalloc.py */,
+				93CAAA772E914FA400D82AF6 /* hash_file.cpp */,
+				93CAAA782E914FA400D82AF6 /* zeroterm.py */,
+				93CAAA792E914FA400D82AF6 /* skyconv */,
+				93CAAA7A2E914FA400D82AF6 /* asm_processor */,
+				93CAAA7B2E914FA400D82AF6 /* utils.c */,
+				93CAAA7C2E914FA400D82AF6 /* sm64tools.LICENSE */,
+				93CAAA7D2E914FA400D82AF6 /* n64graphics */,
+				93CAAA7E2E914FA400D82AF6 /* .gitignore */,
+				93CAAA7F2E914FA400D82AF6 /* extract_data_for_mio */,
+				93CAAA802E914FA400D82AF6 /* hashtable.c */,
+				93CAAA812E914FA400D82AF6 /* aifc_decode.c */,
+				93CAAA822E914FA400D82AF6 /* apply_patch.sh */,
+				93CAAA832E914FA400D82AF6 /* extract_data_for_mio.c */,
+				93CAAA842E914FA400D82AF6 /* vadpcm_enc */,
+				93CAAA852E914FA400D82AF6 /* convert_skybox.py */,
+				93CAAA862E914FA400D82AF6 /* n64cksum.h */,
+				93CAAA872E914FA400D82AF6 /* mario_anims_converter.py */,
+				93CAAA882E914FA400D82AF6 /* aiff_extract_codebook */,
+				93CAAA892E914FA400D82AF6 /* ido5.3_recomp */,
+				93CAAA8A2E914FA400D82AF6 /* clang-tidy.sh */,
+				93CAAA8B2E914FA400D82AF6 /* convert_cake.py */,
+				93CAAA8C2E914FA400D82AF6 /* mio0 */,
+				93CAAA8D2E914FA400D82AF6 /* ido5.3_compiler */,
+				93CAAA8E2E914FA400D82AF6 /* calc_bss.sh */,
+				93CAAA8F2E914FA400D82AF6 /* clean_mapfile.py */,
+				93CAAA902E914FA400D82AF6 /* textconv */,
+				93CAAA912E914FA400D82AF6 /* libmio0.c */,
+				93CAAA922E914FA400D82AF6 /* audiofile */,
+				93CAAA932E914FA400D82AF6 /* seq_decoder.py */,
+				93CAAA942E914FA400D82AF6 /* disassemble_sound.py */,
+				93CAAA952E914FA400D82AF6 /* remove_built_in_mods.py */,
+				93CAAA962E914FA400D82AF6 /* utf8.h */,
+				93CAAA972E914FA400D82AF6 /* create_patch.sh */,
+				93CAAA982E914FA400D82AF6 /* aiff_extract_codebook.c */,
+				93CAAA992E914FA400D82AF6 /* textconv.c */,
+				93CAAA9A2E914FA400D82AF6 /* n64graphics.c */,
+				93CAAA9B2E914FA400D82AF6 /* assemble_sound.py */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		93CAAA502E914FA400D82AF6 /* tools */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 93CAAA9C2E914FA400D82AF6 /* Build configuration list for PBXLegacyTarget "tools" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "/Users/puzhiusdevelop/Documents/GitHub/sm64coopdx/sm64coopdx-ios/tools";
+			dependencies = (
+			);
+			name = tools;
+			passBuildSettingsInEnvironment = 1;
+			productName = tools;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		93CAAA4C2E914FA400D82AF6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+			};
+			buildConfigurationList = 93CAAA4F2E914FA400D82AF6 /* Build configuration list for PBXProject "tools" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 93CAAA4B2E914FA400D82AF6;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				93CAAA502E914FA400D82AF6 /* tools */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		93CAAA4D2E914FA400D82AF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		93CAAA4E2E914FA400D82AF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		93CAAA9D2E914FA400D82AF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = tools;
+			};
+			name = Debug;
+		};
+		93CAAA9E2E914FA400D82AF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = tools;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		93CAAA4F2E914FA400D82AF6 /* Build configuration list for PBXProject "tools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93CAAA4D2E914FA400D82AF6 /* Debug */,
+				93CAAA4E2E914FA400D82AF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93CAAA9C2E914FA400D82AF6 /* Build configuration list for PBXLegacyTarget "tools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93CAAA9D2E914FA400D82AF6 /* Debug */,
+				93CAAA9E2E914FA400D82AF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 93CAAA4C2E914FA400D82AF6 /* Project object */;
+}
