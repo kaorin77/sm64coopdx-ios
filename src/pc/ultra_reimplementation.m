@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#if TARGET_OS_TV
+#if TARGET_OS_IOS
 NSUserDefaults *defaults;
 #endif
 
@@ -52,6 +52,7 @@ s32 osSendMesg(UNUSED OSMesgQueue *mq, UNUSED OSMesg msg, UNUSED s32 flag) {
 #endif
     return 0;
 }
+
 s32 osRecvMesg(UNUSED OSMesgQueue *mq, UNUSED OSMesg *msg, UNUSED s32 flag) {
 #ifdef VERSION_EU
     if (mq->validCount == 0) {
@@ -131,11 +132,26 @@ s32 osEepromProbe(UNUSED OSMesgQueue *mq) {
 }
 
 s32 osEepromLongRead(UNUSED OSMesgQueue *mq, u8 address, u8 *buffer, int nbytes) {
+    // First check if there's an override EEPROM
     if (gOverrideEeprom != NULL) {
         memcpy(buffer, gOverrideEeprom + address * 8, nbytes);
         return 0;
     }
 
+#if TARGET_OS_IOS
+    if (defaults == nil) {
+        defaults = [[NSUserDefaults alloc] initWithSuiteName:SUITE_NAME];
+    }
+    
+    NSData *data = [defaults valueForKey:[NSString stringWithUTF8String:SAVE_FILENAME]];
+    if (data == nil) {
+        return -1;
+    }
+    
+    u8 *dataBytes = (u8 *)[data bytes];
+    memcpy(buffer, dataBytes + address * 8, nbytes);
+    return 0;
+#else
     u8 content[512];
     s32 ret = -1;
 
@@ -150,15 +166,34 @@ s32 osEepromLongRead(UNUSED OSMesgQueue *mq, u8 address, u8 *buffer, int nbytes)
     fs_close(fp);
 
     return ret;
+#endif
 }
 
 s32 osEepromLongWrite(UNUSED OSMesgQueue *mq, u8 address, u8 *buffer, int nbytes) {
+    // First check if there's an override EEPROM
     if (gOverrideEeprom != NULL) {
         memcpy(gOverrideEeprom + address * 8, buffer, nbytes);
         return 0;
     }
 
-    u8 content[512] = { 0 };
+#if TARGET_OS_IOS
+    if (defaults == nil) {
+        defaults = [[NSUserDefaults alloc] initWithSuiteName:SUITE_NAME];
+    }
+    
+    u8 content[512] = {0};
+    if (address != 0 || nbytes != 512) {
+        osEepromLongRead(mq, 0, content, 512);
+    }
+    memcpy(content + address * 8, buffer, nbytes);
+    
+    NSData *data = [NSData dataWithBytes:content length:512];
+    [defaults setObject:data forKey:[NSString stringWithUTF8String:SAVE_FILENAME]];
+    [defaults synchronize];
+    
+    return 0;
+#else
+    u8 content[512] = {0};
     if (address != 0 || nbytes != 512) {
         osEepromLongRead(mq, 0, content, 512);
     }
@@ -172,4 +207,5 @@ s32 osEepromLongWrite(UNUSED OSMesgQueue *mq, u8 address, u8 *buffer, int nbytes
     fclose(fp);
 
     return ret;
+#endif
 }

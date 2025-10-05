@@ -6,18 +6,21 @@
 
 #include "controller_keyboard.h"
 #include "controller_sdl.h"
+#ifdef TARGET_OS_IOS
+#include "controller_touchscreen.h"
+#endif
 
 // Analog camera movement by Pathétique (github.com/vrmiguel), y0shin and Mors
 // Contribute or communicate bugs at github.com/vrmiguel/sm64-analog-camera
-
-// moved these from sdl controller implementations
 
 static struct ControllerAPI *controller_implementations[] = {
 #if defined(CAPI_SDL2) || defined(CAPI_SDL1)
     &controller_sdl,
 #endif
     &controller_keyboard,
+#ifdef TARGET_OS_IOS
     &controller_touchscreen,
+#endif
 };
 
 s32 osContInit(UNUSED OSMesgQueue *mq, u8 *controllerBits, UNUSED OSContStatus *status) {
@@ -28,7 +31,7 @@ s32 osContInit(UNUSED OSMesgQueue *mq, u8 *controllerBits, UNUSED OSContStatus *
 }
 
 s32 osMotorStart(UNUSED void *pfs) {
-    // Since rumble stops by osMotorStop, its duration is not nessecary.
+    // Since rumble stops by osMotorStop, its duration is not necessary.
     // Set it to 5 seconds and hope osMotorStop() is called in time.
     if (configRumbleStrength)
         controller_rumble_play(configRumbleStrength / 100.0f, 5.0f);

@@ -1568,6 +1568,11 @@ $(BUILD_DIR)/%.o: $(BUILD_DIR)/%.c
 	$(V)$(CC_CHECK) $(PROF_FLAGS) $(CC_CHECK_CFLAGS) -MMD -MP -MT $@ -MF $(BUILD_DIR)/$*.d $<
 	$(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<
 
+$(BUILD_DIR)/%.o: %.m
+	$(info $(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<)
+	$(call print,Compiling:,$<,$@)
+	$(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<
+
 $(BUILD_DIR)/%.o: %.c
 	$(info $(V)$(CC) $(PROF_FLAGS) -c $(CFLAGS) -o $@ $<)
 	$(call print,Compiling:,$<,$@)
@@ -1679,7 +1684,7 @@ ifeq ($(TARGET_N64),1)
   $(BUILD_DIR)/$(TARGET).objdump: $(ELF)
 	$(OBJDUMP) -D $< > $@
 else
-  $(EXE): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(BUILD_DIR)/$(RPC_LIBS) $(BUILD_DIR)/$(DISCORD_SDK_LIBS) $(BUILD_DIR)/$(COOPNET_LIBS) $(BUILD_DIR)/$(LANG_DIR) $(BUILD_DIR)/$(MOD_DIR) $(BUILD_DIR)/$(PALETTES_DIR)
+  $(EXE): $(BUILD_DIR)/levels/castle_courtyard/0_custom.rgba16.inc.c $(BUILD_DIR)/levels/castle_grounds/6_custom.rgba16.inc.c $(O_FILES) $(MIO0_FILES:.mio0=.o) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(BUILD_DIR)/$(RPC_LIBS) $(BUILD_DIR)/$(DISCORD_SDK_LIBS) $(BUILD_DIR)/$(COOPNET_LIBS) $(BUILD_DIR)/$(LANG_DIR) $(BUILD_DIR)/$(MOD_DIR) $(BUILD_DIR)/$(PALETTES_DIR)
 	@$(PRINT) "$(GREEN)Linking executable: $(BLUE)$@ $(NO_COL)\n"
 	$(V)$(LD) $(PROF_FLAGS) -L $(BUILD_DIR) -o $@ $(O_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 endif

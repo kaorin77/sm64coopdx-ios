@@ -32,7 +32,7 @@ export IOSLIBS="${BUILT_PRODUCTS_DIR}/"
 
 gmake -j4 TARGET_IOS=1
 
-GAMEDIR_CP_SRC="build/us_pc/sm64ios"
+GAMEDIR_CP_SRC="build/us_pc/sm64coopdx"
 if [[ $EXTERNAL_DATA -eq 1 ]]; then
     GAMEDIR_CP_SRC="build/us_pc/."
 fi
