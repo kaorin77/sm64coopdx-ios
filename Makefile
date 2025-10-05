@@ -68,7 +68,7 @@ HEADLESS ?= 0
 # Enable Game ICON
 ICON ?= 1
 # Use .app (for macOS)
-USE_APP ?= 1
+USE_APP ?= 0
 # Minimum macOS Version
 # If our arch is arm, set to macOS 14
 ifeq ($(shell arch),arm64)
@@ -402,10 +402,6 @@ ifeq ($(OSX_BUILD),1) # Modify GFX & SDL2 for OSX GL
   DEFINES += OSX_BUILD=1
 endif
 
-ifeq ($(TARGET_IOS),1)
-  VERSION_CFLAGS += IOS_BUILD=1
-endif
-
 # Check backends
 
 ifneq (,$(filter $(RENDER_API),D3D11))
@@ -576,6 +572,10 @@ include Makefile.split
 
 # Dynos
 include dynos.mk
+
+ifeq ($(TARGET_IOS),1)
+  VERSION_CFLAGS += IOS_BUILD=1
+endif
 
 # Source code files
 LEVEL_C_FILES     := $(wildcard levels/*/leveldata.c) $(wildcard levels/*/script.c) $(wildcard levels/*/geo.c)
@@ -1260,12 +1260,10 @@ endef
 #all: $(ROM)
 all: $(EXE)
 
-
-
-
-ifeq ($(TARGET_IOS),1)
+${BUILD_DIR}/Base.lproj:
+	$(info Building Base.lproj)
 	@for storyboard_path in ${STORYBOARD_FILES}; do ${IBTOOL} $${storyboard_path} --compilation-directory ${BUILD_DIR}/Base.lproj; done
-endif
+
 
 ifeq ($(WINDOWS_BUILD),1)
 MAPFILE = $(BUILD_DIR)/coop.map
@@ -1685,7 +1683,7 @@ ifeq ($(TARGET_N64),1)
   $(BUILD_DIR)/$(TARGET).objdump: $(ELF)
 	$(OBJDUMP) -D $< > $@
 else
-  $(EXE): $(BUILD_DIR)/levels/castle_courtyard/0_custom.rgba16.inc.c $(BUILD_DIR)/levels/castle_grounds/6_custom.rgba16.inc.c $(O_FILES) $(MIO0_FILES:.mio0=.o) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(BUILD_DIR)/$(RPC_LIBS) $(BUILD_DIR)/$(DISCORD_SDK_LIBS) $(BUILD_DIR)/$(COOPNET_LIBS) $(BUILD_DIR)/$(LANG_DIR) $(BUILD_DIR)/$(MOD_DIR) $(BUILD_DIR)/$(PALETTES_DIR)
+  $(EXE): ${BUILD_DIR}/Base.lproj $(BUILD_DIR)/levels/castle_courtyard/0_custom.rgba16.inc.c $(BUILD_DIR)/levels/castle_grounds/6_custom.rgba16.inc.c $(O_FILES) $(MIO0_FILES:.mio0=.o) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(BUILD_DIR)/$(RPC_LIBS) $(BUILD_DIR)/$(DISCORD_SDK_LIBS) $(BUILD_DIR)/$(COOPNET_LIBS) $(BUILD_DIR)/$(LANG_DIR) $(BUILD_DIR)/$(MOD_DIR) $(BUILD_DIR)/$(PALETTES_DIR)
 	@$(PRINT) "$(GREEN)Linking executable: $(BLUE)$@ $(NO_COL)\n"
 	$(V)$(LD) $(PROF_FLAGS) -L $(BUILD_DIR) -o $@ $(O_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
 endif

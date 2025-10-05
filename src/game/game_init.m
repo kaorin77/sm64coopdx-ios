@@ -468,7 +468,7 @@ void read_controller_inputs(void) {
 
         if (simulatedStartFlag) {
             simulatedStartFlag = false;
-            gControllerPads[0].button |= START_BUTTON;
+//            gControllerPads[0].button |= START_BUTTON;
         }
     }
     run_demo_inputs();

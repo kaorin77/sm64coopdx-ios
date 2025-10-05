@@ -418,7 +418,7 @@ void* main_game_init(UNUSED void* dummy) {
         check_for_updates();
     }
 
-    LOADING_SCREEN_MUTEX(loading_screen_set_segment_text("Loading ROM Assets"));
+    LOADING_SCREEN_MUTEX(loading_screen_set_segment_text("Loading rom assets"));
     rom_assets_load();
     smlua_text_utils_init();
 
@@ -582,19 +582,22 @@ int SDL_main(int argc, char *argv[]) {
     frameController = [[FrameController alloc] init];
     gameTimer = [[GameTimer alloc] init];
     
+    
     UIViewController *gfxVc = get_sdl_viewcontroller();
     gfx_uikit_init(gfxVc);
     gfx_uikit_set_touchscreen_callbacks((void*)touch_down, (void*)touch_motion, (void*)touch_up);
     menu_button_pressed = &present_first_screen;
     
-    configWindow.settings_changed = true;
-    WAPI.reset_dimension_and_pos();
+//    configWindow.settings_changed = true;
+//    WAPI.reset_dimension_and_pos();
     
-    [gameTimer.onGameTick addObject:[NSValue valueWithPointer:ios_produce_one_frame]];
-    [gameTimer startMainLoop:1.0 / 30.0];
+//    SDL_Delay(10000);
+    
+//    [gameTimer.onGameTick addObject:[NSValue valueWithPointer:ios_produce_one_frame]];
+    [gameTimer startMainLoop:1.0 / 60.0];
     [frameController startMainLoop];
 #endif
-
+        
     // main loop
     while (true) {
         debug_context_reset();

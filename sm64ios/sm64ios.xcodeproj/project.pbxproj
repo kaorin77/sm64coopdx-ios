@@ -13,15 +13,11 @@
 		59A67E1D27275B5100FF5D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59AA7BDC2716685000B9AF30 /* Assets.xcassets */; };
 		59B7C220273CBCC2002CDC11 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59B7C21F273CBCC2002CDC11 /* libSDL2.a */; };
 		59B7C222273CBCCA002CDC11 /* libSDLmain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59B7C221273CBCCA002CDC11 /* libSDLmain.a */; };
-		93CAAA432E7843C600D82AF6 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA422E7843C600D82AF6 /* include */; };
+		93A252422E92BF0000A6585C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A252412E92BF0000A6585C /* CoreFoundation.framework */; };
 		93CAAA442E7843C600D82AF6 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA422E7843C600D82AF6 /* include */; };
-		93CAAA492E79B1ED00D82AF6 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA482E79B1ED00D82AF6 /* levels */; };
 		93CAAA4A2E79B1ED00D82AF6 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA482E79B1ED00D82AF6 /* levels */; };
-		93CAAAA12E915EA500D82AF6 /* util.mk in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA02E915EA500D82AF6 /* util.mk */; };
 		93CAAAA22E915EA500D82AF6 /* util.mk in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA02E915EA500D82AF6 /* util.mk */; };
-		93CAAAA42E915EBE00D82AF6 /* Makefile.split in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA32E915EBE00D82AF6 /* Makefile.split */; };
 		93CAAAA52E915EBE00D82AF6 /* Makefile.split in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA32E915EBE00D82AF6 /* Makefile.split */; };
-		93E3EB732E77EAE6009BA3BC /* src in Resources */ = {isa = PBXBuildFile; fileRef = 93E3EB722E77EAE5009BA3BC /* src */; };
 		93E3EB742E77EAE6009BA3BC /* src in Resources */ = {isa = PBXBuildFile; fileRef = 93E3EB722E77EAE5009BA3BC /* src */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +47,8 @@
 		59EFE97027444086007AB508 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93A2523D2E922FBA00A6585C /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = "<group>"; };
 		93A2523E2E9233C900A6585C /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = ../lib; sourceTree = "<group>"; };
+		93A252402E92BE6100A6585C /* ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ios; path = ../ios; sourceTree = "<group>"; };
+		93A252412E92BF0000A6585C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		93CAAA422E7843C600D82AF6 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = include; path = ../include; sourceTree = "<group>"; };
 		93CAAA482E79B1ED00D82AF6 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../levels; sourceTree = "<group>"; };
 		93CAAA9F2E914FA400D82AF6 /* tools */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tools; path = ../tools; sourceTree = "<group>"; };
@@ -72,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93A252422E92BF0000A6585C /* CoreFoundation.framework in Frameworks */,
 				5918D43E271C1EB80085DDED /* libSDL2.a in Frameworks */,
 				5918D43F271C1EB80085DDED /* libSDLmain.a in Frameworks */,
 			);
@@ -124,6 +123,7 @@
 				59A67E1E272A94C400FF5D6C /* appicon.sh */,
 				93CAAA482E79B1ED00D82AF6 /* levels */,
 				59AA7BE22718FDB500B9AF30 /* build_ios.sh */,
+				93A252402E92BE6100A6585C /* ios */,
 				93CAAAA02E915EA500D82AF6 /* util.mk */,
 				93CAAAA32E915EBE00D82AF6 /* Makefile.split */,
 				59AA7BE32718FDB500B9AF30 /* build_sim.sh */,
@@ -142,6 +142,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93A252412E92BF0000A6585C /* CoreFoundation.framework */,
 				59B7C221273CBCCA002CDC11 /* libSDLmain.a */,
 				59B7C21F273CBCC2002CDC11 /* libSDL2.a */,
 				5918D43C271C1EB80085DDED /* libSDL2.a */,
@@ -190,7 +191,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5918D21327192A4D0085DDED /* Build configuration list for PBXNativeTarget "sm64ios" */;
 			buildPhases = (
-				5918D21627192A6A0085DDED /* Build sm64ios for iOS */,
+				5918D21627192A6A0085DDED /* Build sm64coopdx for iOS */,
 				59A67E11272743BB00FF5D6C /* Resources */,
 				5918D222271964520085DDED /* Frameworks */,
 			);
@@ -266,12 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93CAAA432E7843C600D82AF6 /* include in Resources */,
-				93CAAA492E79B1ED00D82AF6 /* levels in Resources */,
-				93CAAAA42E915EBE00D82AF6 /* Makefile.split in Resources */,
-				93CAAAA12E915EA500D82AF6 /* util.mk in Resources */,
 				59A67E1D27275B5100FF5D6C /* Assets.xcassets in Resources */,
-				93E3EB732E77EAE6009BA3BC /* src in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +287,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5918D21627192A6A0085DDED /* Build sm64ios for iOS */ = {
+		5918D21627192A6A0085DDED /* Build sm64coopdx for iOS */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -300,7 +296,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Build sm64ios for iOS";
+			name = "Build sm64coopdx for iOS";
 			outputFileListPaths = (
 			);
 			outputPaths = (
