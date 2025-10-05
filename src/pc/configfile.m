@@ -377,7 +377,7 @@ static const struct ConfigOption options[] = {
     // ios port
     {.name = "touch_controls_mode",            .type = CONFIG_TYPE_UINT,   .uintValue   = &configTouchMode},
     {.name = "haptics",                        .type = CONFIG_TYPE_BOOL,   .boolValue   = &configHaptics},
-    {.name = "touch_ui_scale",                 .type = CONFIG_TYPE_UINT,   .boolValue   = &configTouchUiScale},
+    {.name = "touch_ui_scale",                 .type = CONFIG_TYPE_UINT,   .uintValue   = &configTouchUiScale}
 };
 
 struct SecretConfigOption {
@@ -665,6 +665,7 @@ const char *configfile_backup_name(void) {
 
 // Loads the config file specified by 'filename'
 static void configfile_load_internal(const char *filename, bool* error) {
+    unsigned int temp = 0;
 #if TARGET_OS_IOS
     NSString *nsFilename = [NSString stringWithUTF8String:filename];
     if(defaults == nil) {
@@ -681,14 +682,13 @@ static void configfile_load_internal(const char *filename, bool* error) {
     
     for(NSString *nsline in lines) {
         char *line = (char *)[nsline UTF8String];
-#else
+#else // TARGET_OS_IOS
     fs_file_t *file;
     char *line;
-    unsigned int temp;
     *error = false;
 #ifdef DEVELOPMENT
     printf("Loading configuration from '%s'\n", filename);
-#endif
+#endif // DEVELOPMENT
     file = fs_open(filename);
     if (file == NULL) {
         // Create a new config file and save defaults
@@ -698,7 +698,7 @@ static void configfile_load_internal(const char *filename, bool* error) {
     }
     // Go through each line in the file
     while ((line = read_file_line(file, error)) != NULL && !*error) {
-#endif
+#endif // TARGET_OS_IOS
         char *p = line;
         char *tokens[20];
         int numTokens;
@@ -709,7 +709,7 @@ static void configfile_load_internal(const char *filename, bool* error) {
         if (!*p || *p == '#') {
 #if !TARGET_OS_IOS
             free(line);
-#endif
+#endif // !TARGET_OS_IOS
             continue;
         }
         numTokens = tokenize_string(p, sizeof(tokens) / sizeof(tokens[0]), tokens);
@@ -790,6 +790,7 @@ static void configfile_load_internal(const char *filename, bool* error) {
             }
         }
 NEXT_OPTION:
+    ;
 #if !TARGET_OS_IOS
         free(line);
         line = NULL;

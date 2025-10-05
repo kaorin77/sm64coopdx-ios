@@ -3,6 +3,8 @@
 
 #include "gfx_window_manager_api.h"
 
+#include <SDL2/SDL.h>
+
 #ifdef __OBJC__
 #include <Foundation/Foundation.h>
 #include <UIKit/UIKit.h>

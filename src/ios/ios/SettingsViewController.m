@@ -17,7 +17,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.hapticsSwitch setOn:configHaptics];
-    [self.hudSwitch setOn:configHUD];
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -30,7 +29,6 @@
 }
 
 - (IBAction)HUDChanged:(id)sender {
-    configHUD = [self.hudSwitch isOn];
     configfile_save(configfile_name());
 }
 

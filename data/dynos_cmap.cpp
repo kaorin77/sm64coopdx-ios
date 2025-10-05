@@ -17,10 +17,10 @@ public:
     HMap(MapType type = MapType::Ordered) : mMapType(type) {
         switch (mMapType) {
             case MapType::Ordered:
-                mOrderedMap = std::make_unique<std::map<int64_t, void*>>();
+                mOrderedMap = std::unique_ptr<std::map<int64_t, void*>>(new std::map<int64_t, void*>());
                 break;
             case MapType::Unordered:
-                mUnorderedMap = std::make_unique<std::unordered_map<int64_t, void*>>();
+                mUnorderedMap = std::unique_ptr<std::unordered_map<int64_t, void*>>(new std::unordered_map<int64_t, void*>());
                 break;
         }
     }
@@ -48,10 +48,26 @@ public:
     void put(int64_t key, void* value) {
         switch (mMapType) {
             case MapType::Ordered:
-                mOrderedMap->insert_or_assign(key, value);
+                // Заменяем insert_or_assign на поиск и вставку
+                {
+                    auto it = mOrderedMap->find(key);
+                    if (it != mOrderedMap->end()) {
+                        it->second = value;
+                    } else {
+                        mOrderedMap->insert(std::make_pair(key, value));
+                    }
+                }
                 break;
             case MapType::Unordered:
-                mUnorderedMap->insert_or_assign(key, value);
+                // Заменяем insert_or_assign на поиск и вставку
+                {
+                    auto it = mUnorderedMap->find(key);
+                    if (it != mUnorderedMap->end()) {
+                        it->second = value;
+                    } else {
+                        mUnorderedMap->insert(std::make_pair(key, value));
+                    }
+                }
                 break;
         }
     }

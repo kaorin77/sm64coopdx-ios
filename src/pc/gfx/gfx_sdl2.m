@@ -1,3 +1,5 @@
+// gfx_sdl2.m
+
 #ifdef WAPI_SDL2
 #ifdef __MINGW32__
 #define FOR_WINDOWS 1
@@ -67,6 +69,8 @@ static bool use_timer = true;
 static double frame_time = 0.0; // set in init()
 // GetPerformanceFrequency
 static double perf_freq = 0.0;
+
+static void gfx_sdl_swap_buffers_begin(void);
 
 #define IS_FULLSCREEN() ((SDL_GetWindowFlags(wnd) & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
 

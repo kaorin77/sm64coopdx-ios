@@ -5,6 +5,9 @@
 #include <time.h>
 #include <unistd.h>
 
+#include "pc/gfx/gfx_sdl.h"
+#include <pc/gfx/gfx_uikit.h>
+
 #include <SDL2/SDL.h>
 
 #import <Foundation/Foundation.h>

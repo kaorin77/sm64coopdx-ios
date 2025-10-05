@@ -768,9 +768,9 @@ endif
 
 # thank you apple very cool
 ifeq ($(HOST_OS),Darwin)
-  CP := gcp
+  CP ?= gcp
 else
-  CP := cp
+  CP ?= cp
 endif
 
 ifeq ($(DISCORD_SDK),1)
@@ -1011,7 +1011,7 @@ ifeq ($(WINDOWS_BUILD),1)
   LDFLAGS += -lwininet
 else
   CFLAGS += -I$(brew --prefix curl)/include
-  LDFLAGS += -L$(brew --prefix curl)/lib -lcurl
+#  LDFLAGS += -L$(brew --prefix curl)/lib -lcurl
 #  LDFLAGS += -lcurl
 endif
 
@@ -1023,7 +1023,8 @@ ifeq ($(WINDOWS_BUILD),1)
     LDFLAGS += -Llib/lua/win64 -l:liblua53.a
   endif
 else ifeq ($(OSX_BUILD),1)
-  ifeq ($(IOS_BUILD),1)
+  ifeq ($(TARGET_IOS),1)
+    $(info YOYOYOYOYYOYO LUA LINKED LMAO LMFAO)
     LDFLAGS += -L./lib/lua/ios/ -l lua53
   else
     ifeq ($(shell uname -m),arm64)

@@ -466,10 +466,10 @@ void read_controller_inputs(void) {
         osRecvMesg(&gSIEventMesgQueue, &D_80339BEC, OS_MESG_BLOCK);
         osContGetReadData(gInteractableOverridePad ? &gInteractablePad : &gControllerPads[0]);
 
-        if (simulatedStartFlag)[
-            simulatedStartFlag = false
+        if (simulatedStartFlag) {
+            simulatedStartFlag = false;
             gControllerPads[0].button |= START_BUTTON;
-        ]
+        }
     }
     run_demo_inputs();
 
