@@ -1024,7 +1024,6 @@ ifeq ($(WINDOWS_BUILD),1)
   endif
 else ifeq ($(OSX_BUILD),1)
   ifeq ($(TARGET_IOS),1)
-    $(info YOYOYOYOYYOYO LUA LINKED LMAO LMFAO)
     LDFLAGS += -L./lib/lua/ios/ -l lua53
   else
     ifeq ($(shell uname -m),arm64)

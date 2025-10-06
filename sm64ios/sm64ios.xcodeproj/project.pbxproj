@@ -14,6 +14,7 @@
 		59B7C220273CBCC2002CDC11 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59B7C21F273CBCC2002CDC11 /* libSDL2.a */; };
 		59B7C222273CBCCA002CDC11 /* libSDLmain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59B7C221273CBCCA002CDC11 /* libSDLmain.a */; };
 		93A252422E92BF0000A6585C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A252412E92BF0000A6585C /* CoreFoundation.framework */; };
+		93A252442E936AB500A6585C /* lang in Resources */ = {isa = PBXBuildFile; fileRef = 93A252432E936AB500A6585C /* lang */; };
 		93CAAA442E7843C600D82AF6 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA422E7843C600D82AF6 /* include */; };
 		93CAAA4A2E79B1ED00D82AF6 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA482E79B1ED00D82AF6 /* levels */; };
 		93CAAAA22E915EA500D82AF6 /* util.mk in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA02E915EA500D82AF6 /* util.mk */; };
@@ -49,6 +50,7 @@
 		93A2523E2E9233C900A6585C /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = ../lib; sourceTree = "<group>"; };
 		93A252402E92BE6100A6585C /* ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ios; path = ../ios; sourceTree = "<group>"; };
 		93A252412E92BF0000A6585C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		93A252432E936AB500A6585C /* lang */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lang; path = ../lang; sourceTree = "<group>"; };
 		93CAAA422E7843C600D82AF6 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = include; path = ../include; sourceTree = "<group>"; };
 		93CAAA482E79B1ED00D82AF6 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../levels; sourceTree = "<group>"; };
 		93CAAA9F2E914FA400D82AF6 /* tools */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tools; path = ../tools; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				93A252432E936AB500A6585C /* lang */,
 				29B97315FDCFA39411CA2CEA /* Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				5918D1FE27192A420085DDED /* sm64ios */,
@@ -267,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93A252442E936AB500A6585C /* lang in Resources */,
 				59A67E1D27275B5100FF5D6C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

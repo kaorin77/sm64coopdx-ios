@@ -410,6 +410,7 @@ void* main_game_init(UNUSED void* dummy) {
     if (!djui_language_init(configLanguage)) { snprintf(configLanguage, MAX_CONFIG_STRING, "%s", ""); }
 
     LOADING_SCREEN_MUTEX(loading_screen_set_segment_text("Loading"));
+    
     dynos_gfx_init();
     enable_queued_dynos_packs();
     sync_objects_init_system();
@@ -481,6 +482,27 @@ int SDL_main(int argc, char *argv[]) {
     if (gCLIOpts.headless) {
         memcpy(&WAPI, &gfx_dummy_wm_api, sizeof(struct GfxWindowManagerAPI));
         memcpy(&RAPI, &gfx_dummy_renderer_api, sizeof(struct GfxRenderingAPI));
+    }
+#endif
+    
+#if TARGET_OS_IOS
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    NSString *placeholderPath = [documentsDirectory stringByAppendingPathComponent:@"PLACE_YOUR_ROM_HERE.txt"];
+
+    if (![[NSFileManager defaultManager] fileExistsAtPath:placeholderPath]) {
+        NSString *content = @"Put your baserom.us.z64 ROM file in this folder.\n"
+                            "The ROM must be named exactly: baserom.us.z64\n";
+        NSError *error = nil;
+        [content writeToFile:placeholderPath
+                  atomically:YES
+                    encoding:NSUTF8StringEncoding
+                       error:&error];
+        if (error) {
+            LOADING_SCREEN_MUTEX(loading_screen_set_segment_text("Failed to create file"));
+            SDL_Delay(10000);
+            return 1;
+        }
     }
 #endif
 
