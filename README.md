@@ -1,11 +1,13 @@
 # TODOS
  - [X] Compile
- - [ ] Fix touch controls
+ - [X] Fix touch controls
+ - [ ] Compile libjuice and coopnet for ios
  - [ ] Replace touch controls with better textures
  - [ ] Add additional buttons to touch controls
  - [ ] Disable buildinng for PC
  - [ ] Clean the code
- - [ ] Delete support fot tvOS
+ - [ ] Add gamepad support
+ - [ ] Delete support for tvOS
 
 code is not good because it's just proof of concept
 
