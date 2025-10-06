@@ -49,8 +49,8 @@ void djui_panel_main_create(struct DjuiBase* caller) {
             if (!configExCoopTheme) { djui_base_set_location(&button2->base, 0, -30); }
             struct DjuiButton* button3 = djui_button_create(body, DLANG(MAIN, OPTIONS), DJUI_BUTTON_STYLE_NORMAL, djui_panel_options_create);
             if (!configExCoopTheme) { djui_base_set_location(&button3->base, 0, -30); }
-            struct DjuiButton* button4 = djui_button_create(body, DLANG(MAIN, QUIT), DJUI_BUTTON_STYLE_BACK, djui_panel_main_quit);
-            if (!configExCoopTheme) { djui_base_set_location(&button4->base, 0, -30); }
+            // struct DjuiButton* button4 = djui_button_create(body, DLANG(MAIN, QUIT), DJUI_BUTTON_STYLE_BACK, djui_panel_main_quit);
+            // if (!configExCoopTheme) { djui_base_set_location(&button4->base, 0, -30); }
         }
 
         // these two cannot co-exist for some reason

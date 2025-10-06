@@ -443,8 +443,24 @@ void present_first_screen(void) {
     present_viewcontroller(@"MenuNav", true);
 }
 
-void ios_produce_one_frame(void) {
+void ios_game_loop(CFRunLoopTimerRef timer, void *info) {
+    debug_context_reset();
+    CTX_BEGIN(CTX_TOTAL);
     WAPI.main_loop(produce_one_frame);
+#ifdef DISCORD_SDK
+    discord_update();
+#endif
+    mumble_update();
+#ifdef DEBUG
+    fflush(stdout);
+    fflush(stderr);
+#endif
+    CTX_END(CTX_TOTAL);
+
+#ifdef DEVELOPMENT
+    djui_ctx_display_update();
+#endif
+    djui_lua_profiler_update();
 }
 #endif
 
@@ -485,7 +501,7 @@ int SDL_main(int argc, char *argv[]) {
     }
 #endif
     
-#if TARGET_OS_IOS
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths firstObject];
     NSString *placeholderPath = [documentsDirectory stringByAppendingPathComponent:@"PLACE_YOUR_ROM_HERE.txt"];
@@ -504,7 +520,6 @@ int SDL_main(int argc, char *argv[]) {
             return 1;
         }
     }
-#endif
 
     configfile_load();
 
@@ -599,39 +614,25 @@ int SDL_main(int argc, char *argv[]) {
         network_init(NT_NONE, false);
     }
 
-    // iOS specific setup
-#if TARGET_OS_IOS
     UIViewController *gfxVc = get_sdl_viewcontroller();
     gfx_uikit_init(gfxVc);
     gfx_uikit_set_touchscreen_callbacks((void*)touch_down, (void*)touch_motion, (void*)touch_up);
     menu_button_pressed = &present_first_screen;
-    
-//    configWindow.settings_changed = true;
-//    WAPI.reset_dimension_and_pos();
-    
-//    SDL_Delay(10000);
-#endif
         
-    // main loop
-    while (true) {
-        debug_context_reset();
-        CTX_BEGIN(CTX_TOTAL);
-        WAPI.main_loop(produce_one_frame);
-#ifdef DISCORD_SDK
-        discord_update();
-#endif
-        mumble_update();
-#ifdef DEBUG
-        fflush(stdout);
-        fflush(stderr);
-#endif
-        CTX_END(CTX_TOTAL);
+    CFRunLoopTimerContext context = {0, NULL, NULL, NULL, NULL};
+    CFRunLoopTimerRef timer = CFRunLoopTimerCreate(
+        kCFAllocatorDefault,
+        CFAbsoluteTimeGetCurrent() + 0.016,
+        0.016,
+        0,
+        0,
+        ios_game_loop,
+        &context
+    );
 
-#ifdef DEVELOPMENT
-        djui_ctx_display_update();
-#endif
-        djui_lua_profiler_update();
-    }
+    CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
+
+    CFRunLoopRun();
 
     return 0;
 }

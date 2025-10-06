@@ -5,6 +5,6 @@
       location = "group:../SDL2/Xcode/SDL/SDL.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:sm64ios/sm64ios.xcodeproj">
+      location = "group:/Users/puzhiusdevelop/Documents/GitHub/sm64coopdx/sm64coopdx-ios/sm64ios/sm64coopdx_ios.xcodeproj">
    </FileRef>
 </Workspace>
