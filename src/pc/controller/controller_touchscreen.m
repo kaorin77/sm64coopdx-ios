@@ -223,6 +223,8 @@ void touchscreen_set_imageviews(NSMutableArray *imageViews) {
     }
 }
 
+#include "SDL2/SDL.h"
+
 static void touchscreen_read(OSContPad *pad) {
     for(int i = 0; i < ControlElementsLength; i++) {
         switch (ControlElements[i].type) {
@@ -234,11 +236,7 @@ static void touchscreen_read(OSContPad *pad) {
                 break;
             case Button:
                 if (ControlElements[i].touchID) {
-                    if(ControlElements[i].menuButton) {
-                        (*menu_button_pressed)();
-                    } else {
-                        pad->button |= ControlElements[i].buttonID;
-                    }
+                    pad->button |= ControlElements[i].buttonID;
                 }
                 break;
         }

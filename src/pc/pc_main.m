@@ -579,10 +579,6 @@ int SDL_main(int argc, char *argv[]) {
 
     // iOS specific setup
 #if TARGET_OS_IOS
-    frameController = [[FrameController alloc] init];
-    gameTimer = [[GameTimer alloc] init];
-    
-    
     UIViewController *gfxVc = get_sdl_viewcontroller();
     gfx_uikit_init(gfxVc);
     gfx_uikit_set_touchscreen_callbacks((void*)touch_down, (void*)touch_motion, (void*)touch_up);
@@ -592,10 +588,6 @@ int SDL_main(int argc, char *argv[]) {
 //    WAPI.reset_dimension_and_pos();
     
 //    SDL_Delay(10000);
-    
-//    [gameTimer.onGameTick addObject:[NSValue valueWithPointer:ios_produce_one_frame]];
-    [gameTimer startMainLoop:1.0 / 60.0];
-    [frameController startMainLoop];
 #endif
         
     // main loop
