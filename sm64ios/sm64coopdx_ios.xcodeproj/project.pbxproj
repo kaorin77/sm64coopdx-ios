@@ -9,17 +9,9 @@
 /* Begin PBXBuildFile section */
 		5918D43E271C1EB80085DDED /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5918D43C271C1EB80085DDED /* libSDL2.a */; };
 		5918D43F271C1EB80085DDED /* libSDLmain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5918D43D271C1EB80085DDED /* libSDLmain.a */; };
-		591E1CF6274048E9004DA542 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59B7C215273CBC89002CDC11 /* Assets.xcassets */; };
 		59A67E1D27275B5100FF5D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59AA7BDC2716685000B9AF30 /* Assets.xcassets */; };
-		59B7C220273CBCC2002CDC11 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59B7C21F273CBCC2002CDC11 /* libSDL2.a */; };
-		59B7C222273CBCCA002CDC11 /* libSDLmain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59B7C221273CBCCA002CDC11 /* libSDLmain.a */; };
 		93A252422E92BF0000A6585C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A252412E92BF0000A6585C /* CoreFoundation.framework */; };
 		93A252442E936AB500A6585C /* lang in Resources */ = {isa = PBXBuildFile; fileRef = 93A252432E936AB500A6585C /* lang */; };
-		93CAAA442E7843C600D82AF6 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA422E7843C600D82AF6 /* include */; };
-		93CAAA4A2E79B1ED00D82AF6 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAA482E79B1ED00D82AF6 /* levels */; };
-		93CAAAA22E915EA500D82AF6 /* util.mk in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA02E915EA500D82AF6 /* util.mk */; };
-		93CAAAA52E915EBE00D82AF6 /* Makefile.split in Resources */ = {isa = PBXBuildFile; fileRef = 93CAAAA32E915EBE00D82AF6 /* Makefile.split */; };
-		93E3EB742E77EAE6009BA3BC /* src in Resources */ = {isa = PBXBuildFile; fileRef = 93E3EB722E77EAE5009BA3BC /* src */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,11 +33,8 @@
 		59AA7BE02718F94400B9AF30 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		59AA7BE22718FDB500B9AF30 /* build_ios.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build_ios.sh; path = ../build_ios.sh; sourceTree = "<group>"; };
 		59AA7BE32718FDB500B9AF30 /* build_sim.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build_sim.sh; path = ../build_sim.sh; sourceTree = "<group>"; };
-		59B7C20A273CBC6B002CDC11 /* sm64tvos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sm64tvos.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		59B7C215273CBC89002CDC11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59B7C21F273CBCC2002CDC11 /* libSDL2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B7C221273CBCCA002CDC11 /* libSDLmain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDLmain.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		59EFE97027444086007AB508 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93A2523D2E922FBA00A6585C /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = "<group>"; };
 		93A2523E2E9233C900A6585C /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = ../lib; sourceTree = "<group>"; };
 		93A252402E92BE6100A6585C /* ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ios; path = ../ios; sourceTree = "<group>"; };
@@ -79,15 +68,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		59B7C207273CBC6B002CDC11 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				59B7C220273CBCC2002CDC11 /* libSDL2.a in Frameworks */,
-				59B7C222273CBCCA002CDC11 /* libSDLmain.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -95,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				5918D1FD27192A420085DDED /* sm64ios.app */,
-				59B7C20A273CBC6B002CDC11 /* sm64tvos.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,7 +86,6 @@
 				29B97315FDCFA39411CA2CEA /* Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				5918D1FE27192A420085DDED /* sm64ios */,
-				59B7C20B273CBC6B002CDC11 /* sm64tvos */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -180,15 +158,6 @@
 			path = sm64ios;
 			sourceTree = "<group>";
 		};
-		59B7C20B273CBC6B002CDC11 /* sm64tvos */ = {
-			isa = PBXGroup;
-			children = (
-				59EFE97027444086007AB508 /* Info.plist */,
-				59B7C215273CBC89002CDC11 /* Assets.xcassets */,
-			);
-			path = sm64tvos;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -209,23 +178,6 @@
 			productReference = 5918D1FD27192A420085DDED /* sm64ios.app */;
 			productType = "com.apple.product-type.application";
 		};
-		59B7C209273CBC6B002CDC11 /* sm64tvos */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 59B7C21C273CBC8A002CDC11 /* Build configuration list for PBXNativeTarget "sm64tvos" */;
-			buildPhases = (
-				59793DC4273CF92900F6F356 /* Build sm64ios for tvOS */,
-				59B7C208273CBC6B002CDC11 /* Resources */,
-				59B7C207273CBC6B002CDC11 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = sm64tvos;
-			productName = sm64tvos;
-			productReference = 59B7C20A273CBC6B002CDC11 /* sm64tvos.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -237,11 +189,6 @@
 					5918D1FC27192A420085DDED = {
 						CreatedOnToolsVersion = 13.0;
 						DevelopmentTeam = 43D6WX8379;
-						ProvisioningStyle = Automatic;
-					};
-					59B7C209273CBC6B002CDC11 = {
-						CreatedOnToolsVersion = 13.1;
-						DevelopmentTeam = MQD5EFD75S;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -262,7 +209,6 @@
 			projectRoot = "";
 			targets = (
 				5918D1FC27192A420085DDED /* sm64ios */,
-				59B7C209273CBC6B002CDC11 /* sm64tvos */,
 			);
 		};
 /* End PBXProject section */
@@ -274,19 +220,6 @@
 			files = (
 				93A252442E936AB500A6585C /* lang in Resources */,
 				59A67E1D27275B5100FF5D6C /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		59B7C208273CBC6B002CDC11 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				93CAAA442E7843C600D82AF6 /* include in Resources */,
-				93CAAA4A2E79B1ED00D82AF6 /* levels in Resources */,
-				93CAAAA52E915EBE00D82AF6 /* Makefile.split in Resources */,
-				93CAAAA22E915EA500D82AF6 /* util.mk in Resources */,
-				591E1CF6274048E9004DA542 /* Assets.xcassets in Resources */,
-				93E3EB742E77EAE6009BA3BC /* src in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,24 +236,6 @@
 			inputPaths = (
 			);
 			name = "Build sm64coopdx for iOS";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ $(uname -m) == \"arm64\" ]]; then\n  eval \"$(/opt/homebrew/bin/brew shellenv)\"\nfi\ncd \"$PROJECT_DIR/..\" && \"./build.sh\"\n";
-		};
-		59793DC4273CF92900F6F356 /* Build sm64ios for tvOS */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Build sm64ios for tvOS";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -501,110 +416,6 @@
 			};
 			name = Release;
 		};
-		59B7C21D273CBC8A002CDC11 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = MQD5EFD75S;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = sm64tvos/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Super Mario 64";
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.christiankosman.sm64tvo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = appletvos;
-				SDL2_INCLUDE_DIR = "$(PROJECT_DIR)/../../include";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 14.0;
-			};
-			name = Debug;
-		};
-		59B7C21E273CBC8A002CDC11 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = MQD5EFD75S;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = sm64tvos/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Super Mario 64";
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.christiankosman.sm64tvo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = appletvos;
-				SDL2_INCLUDE_DIR = "$(PROJECT_DIR)/../../include";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 14.0;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -691,15 +502,6 @@
 			buildConfigurations = (
 				5918D21427192A4D0085DDED /* Debug */,
 				5918D21527192A4D0085DDED /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		59B7C21C273CBC8A002CDC11 /* Build configuration list for PBXNativeTarget "sm64tvos" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				59B7C21D273CBC8A002CDC11 /* Debug */,
-				59B7C21E273CBC8A002CDC11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
