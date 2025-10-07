@@ -36,7 +36,6 @@ void gfx_uikit_init(UIViewController *viewControllerPointer) {
     
     mainWindow = [[[UIApplication sharedApplication] delegate] window];
     
-#if TARGET_OS_IOS
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     tcvc = [[storyboard instantiateViewControllerWithIdentifier:@"TouchControlsViewController"] retain];
     
@@ -47,11 +46,6 @@ void gfx_uikit_init(UIViewController *viewControllerPointer) {
     }
     
     [gameViewController setNeedsUpdateOfScreenEdgesDeferringSystemGestures];
-#elif TARGET_OS_TV
-    RemoteInputController *remoteInput = [[RemoteInputController alloc] initWithTarget:gameViewController];
-    [remoteInput.onMenuButtonPressed addObject:[NSValue valueWithPointer:tvos_present_main_menu]];
-    [remoteInput.onPlayPauseButtonPressed addObject:[NSValue valueWithPointer:simulate_start_button_press]];
-#endif
 }
 
 #if TARGET_OS_IOS
@@ -91,8 +85,3 @@ void gfx_uikit_set_touchscreen_callbacks(void (*down)(void* event), void (*motio
 }
 #endif
 
-#if TARGET_OS_TV
-void tvos_present_main_menu() {
-    present_viewcontroller(@"MenuNav", true);
-}
-#endif

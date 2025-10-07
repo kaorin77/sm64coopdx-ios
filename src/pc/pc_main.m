@@ -438,31 +438,11 @@ void* main_game_init(UNUSED void* dummy) {
     gGameInited = true;
 }
 
-#if TARGET_OS_IOS
-void present_first_screen(void) {
-    present_viewcontroller(@"MenuNav", true);
-}
-
-void ios_game_loop(CFRunLoopTimerRef timer, void *info) {
-    debug_context_reset();
-    CTX_BEGIN(CTX_TOTAL);
-    WAPI.main_loop(produce_one_frame);
-#ifdef DISCORD_SDK
-    discord_update();
-#endif
-    mumble_update();
-#ifdef DEBUG
-    fflush(stdout);
-    fflush(stderr);
-#endif
-    CTX_END(CTX_TOTAL);
-
-#ifdef DEVELOPMENT
-    djui_ctx_display_update();
-#endif
-    djui_lua_profiler_update();
-}
-#endif
+//#if TARGET_OS_IOS
+//void present_first_screen(void) {
+//    present_viewcontroller(@"MenuNav", true);
+//}
+//#endif
 
 int SDL_main(int argc, char *argv[]) {
     // handle terminal arguments
@@ -617,22 +597,26 @@ int SDL_main(int argc, char *argv[]) {
     UIViewController *gfxVc = get_sdl_viewcontroller();
     gfx_uikit_init(gfxVc);
     gfx_uikit_set_touchscreen_callbacks((void*)touch_down, (void*)touch_motion, (void*)touch_up);
-    menu_button_pressed = &present_first_screen;
         
-    CFRunLoopTimerContext context = {0, NULL, NULL, NULL, NULL};
-    CFRunLoopTimerRef timer = CFRunLoopTimerCreate(
-        kCFAllocatorDefault,
-        CFAbsoluteTimeGetCurrent() + 0.016,
-        0.016,
-        0,
-        0,
-        ios_game_loop,
-        &context
-    );
+    while (true) {
+        debug_context_reset();
+        CTX_BEGIN(CTX_TOTAL);
+        WAPI.main_loop(produce_one_frame);
+#ifdef DISCORD_SDK
+        discord_update();
+#endif
+        mumble_update();
+#ifdef DEBUG
+        fflush(stdout);
+        fflush(stderr);
+#endif
+        CTX_END(CTX_TOTAL);
 
-    CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, kCFRunLoopCommonModes);
-
-    CFRunLoopRun();
+#ifdef DEVELOPMENT
+        djui_ctx_display_update();
+#endif
+        djui_lua_profiler_update();
+    }
 
     return 0;
 }
