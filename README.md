@@ -14,11 +14,12 @@ A port of [sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) to iOS
  - [ ] Replace touch controls with better textures from robertkirkman/sm64ex-coop
  - [ ] Add ex-coop buttons to touch controls
  - [ ] Disable building for PC
- - [ ] Make code better
+ - [ ] Remove simulatedStartFlag
  - [ ] Add gamepad support
  - [ ] Delete support for tvOS
- - [ ] Make compilation tutorial
+ - [ ] Create a compilation tutorial
  - [ ] Make first release
+ - [ ] Add ability to change touch control buttons size and position
 
 Contains code from:
  - VDavid003/sm64-port-android
