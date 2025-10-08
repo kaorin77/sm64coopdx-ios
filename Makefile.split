@@ -238,6 +238,7 @@ MACHINE_TEXTURES                := $(wildcard $(TEXTURE_DIR)/machine/*.png)
 MOUNTAIN_TEXTURES               := $(wildcard $(TEXTURE_DIR)/mountain/*.png)
 GRASS_TEXTURES                  := $(wildcard $(TEXTURE_DIR)/grass/*.png)
 CUSTOM_FONT_TEXTURES            := $(wildcard $(TEXTURE_DIR)/custom_font/*.png)
+TOUCH_SCREEN_TEXTURES           := $(wildcard $(TEXTURE_DIR)/touchcontrols/*.png)
 
 # Texture Files
 $(BUILD_DIR)/bin/segment2.o:          $(SEGMENT2_TEXTURES:%.png=$(BUILD_DIR)/%.inc.c)

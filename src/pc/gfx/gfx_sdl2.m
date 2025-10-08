@@ -225,6 +225,7 @@ static void gfx_sdl_ondropfile(char* path) {
 #endif
 }
 
+#ifdef TOUCH_CONTROLS
 static void gfx_sdl_fingerdown(SDL_TouchFingerEvent sdl_event) {
     struct TouchEvent event;
     event.x = sdl_event.x;
@@ -254,6 +255,7 @@ static void gfx_sdl_fingerup(SDL_TouchFingerEvent sdl_event) {
         touch_up_callback((void*)&event);
     }
 }
+#endif
 
 static void gfx_sdl_handle_events(void) {
     SDL_Event event;
@@ -309,7 +311,7 @@ static void gfx_sdl_handle_events(void) {
                 paused_by_menu = false;
                 frameController.gfxDisplayLink.paused = false;
                 break;
-#if TARGET_OS_IOS
+#if TOUCH_CONTROLS
             case SDL_FINGERDOWN:
                 gfx_sdl_fingerdown(event.tfinger);
                 break;
@@ -319,6 +321,7 @@ static void gfx_sdl_handle_events(void) {
             case SDL_FINGERUP:
                 gfx_sdl_fingerup(event.tfinger);
                 break;
+#endif
             case SDL_DISPLAYEVENT:
                 switch(event.display.event) {
                     case SDL_DISPLAYEVENT_CONNECTED:
@@ -331,7 +334,6 @@ static void gfx_sdl_handle_events(void) {
                         break;
                 }
                 break;
-#endif
             case SDL_QUIT:
                 game_exit();
                 break;

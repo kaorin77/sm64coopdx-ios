@@ -12,6 +12,9 @@
 #include "pc/cliopts.h"
 #include "game/level_update.h"
 #include "pc/lua/smlua_hooks.h"
+#ifdef TOUCH_CONTROLS
+#include "src/pc/controller/controller_touchscreen.h"
+#endif
 #include "djui_panel_playerlist.h"
 #include "djui_hud_utils.h"
 #include "engine/math_util.h"
@@ -185,6 +188,9 @@ void djui_render(void) {
     }
 
     djui_cursor_update();
+#ifdef TOUCH_CONTROLS // In the future, check if touch controls exist rather than checking if the TOUCH_CONTROLS define exists
+    render_touch_controls();
+#endif
     djui_base_render(&gDjuiConsole->base);
     djui_interactable_update();
     djui_gfx_displaylist_end();
