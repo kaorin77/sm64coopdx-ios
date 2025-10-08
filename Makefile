@@ -51,7 +51,7 @@ ENHANCE_LEVEL_TEXTURES ?= 1
 # Enable Discord Game SDK (used for Discord invites)
 DISCORD_SDK ?= 0
 # Enable CoopNet SDK (used for CoopNet server hosting)
-COOPNET ?= 0
+COOPNET ?= 1
 # Enable docker build workarounds
 DOCKERBUILD ?= 0
 # Sets your optimization level for building.
@@ -1054,14 +1054,18 @@ ifeq ($(COOPNET),1)
       LDFLAGS += -Llib/coopnet/win64 -l:libcoopnet.a -l:libjuice.a -lbcrypt -liphlpapi
     endif
   else ifeq ($(OSX_BUILD),1)
-    ifeq ($(shell uname -m),arm64)
-      LDFLAGS += -Wl,-rpath,@loader_path -L./lib/coopnet/mac_arm/ -l coopnet
-      COOPNET_LIBS += ./lib/coopnet/mac_arm/libcoopnet.dylib
-      COOPNET_LIBS += ./lib/coopnet/mac_arm/libjuice.1.2.2.dylib
+    ifeq ($(TARGET_IOS),1)
+      LDFLAGS += -L./lib/coopnet/ios/ -l coopnet -l juice
     else
-      LDFLAGS += -Wl,-rpath,@loader_path -L./lib/coopnet/mac_intel/ -l coopnet
-      COOPNET_LIBS += ./lib/coopnet/mac_intel/libcoopnet.dylib
-      COOPNET_LIBS += ./lib/coopnet/mac_intel/libjuice.1.2.2.dylib
+      ifeq ($(shell uname -m),arm64)
+        LDFLAGS += -Wl,-rpath,@loader_path -L./lib/coopnet/mac_arm/ -l coopnet
+        COOPNET_LIBS += ./lib/coopnet/mac_arm/libcoopnet.dylib
+        COOPNET_LIBS += ./lib/coopnet/mac_arm/libjuice.1.2.2.dylib
+      else
+        LDFLAGS += -Wl,-rpath,@loader_path -L./lib/coopnet/mac_intel/ -l coopnet
+        COOPNET_LIBS += ./lib/coopnet/mac_intel/libcoopnet.dylib
+        COOPNET_LIBS += ./lib/coopnet/mac_intel/libjuice.1.2.2.dylib
+      endif
     endif
   else ifeq ($(TARGET_RPI),1)
     ifneq (,$(findstring aarch64,$(machine)))
