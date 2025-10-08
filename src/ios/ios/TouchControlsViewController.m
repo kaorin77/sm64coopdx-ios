@@ -168,7 +168,7 @@
     self.m_iv_left.buttonTag = L_CBUTTONS;
     self.m_iv_right.buttonTag = R_CBUTTONS;
     self.m_iv_start.buttonTag = START_BUTTON;
-    self.m_iv_menu.buttonTag = 69;
+    //self.m_iv_menu.buttonTag = 69;
     self.m_iv_joystick.buttonTag = 420;
     self.m_iv_joystick_bg.buttonTag = 69420;
     
@@ -183,7 +183,7 @@
     [imageViews addObject:self.m_iv_left];
     [imageViews addObject:self.m_iv_right];
     [imageViews addObject:self.m_iv_start];
-    [imageViews addObject:self.m_iv_menu];
+    //[imageViews addObject:self.m_iv_menu];
     [imageViews addObject:self.m_iv_joystick];
     [imageViews addObject:self.m_iv_joystick_bg];
     touchscreen_set_imageviews(imageViews);
