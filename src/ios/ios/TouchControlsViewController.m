@@ -147,12 +147,12 @@
     [self.m_gl_left setRotation:270.0];
     [self.m_gl_right setRotation:90.0];
     
-    CGFloat scale = ((float)configTouchUiScale/100.0);
-    self.m_group_lr.transform = CGAffineTransformMakeScale(scale, scale);
-    self.m_group_joystick.transform = CGAffineTransformMakeScale(scale, scale);
-    self.m_group_startmenu.transform = CGAffineTransformMakeScale(scale, scale);
-    self.m_group_main.transform = CGAffineTransformMakeScale(scale, scale);
-    self.m_group_cbuttons.transform = CGAffineTransformMakeScale(scale, scale);
+//    CGFloat scale = ((float)configTouchUiScale/100.0);
+//    self.m_group_lr.transform = CGAffineTransformMakeScale(scale, scale);
+//    self.m_group_joystick.transform = CGAffineTransformMakeScale(scale, scale);
+//    self.m_group_startmenu.transform = CGAffineTransformMakeScale(scale, scale);
+//    self.m_group_main.transform = CGAffineTransformMakeScale(scale, scale);
+//    self.m_group_cbuttons.transform = CGAffineTransformMakeScale(scale, scale);
     
     [self setTouchscreenImageViews];
 }
@@ -186,7 +186,7 @@
     //[imageViews addObject:self.m_iv_menu];
     [imageViews addObject:self.m_iv_joystick];
     [imageViews addObject:self.m_iv_joystick_bg];
-    touchscreen_set_imageviews(imageViews);
+//    touchscreen_set_imageviews(imageViews);
 }
 
 - (void)handleTouchAction:(GestureRecognizer *)sender {
