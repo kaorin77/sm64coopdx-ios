@@ -197,7 +197,7 @@
     touch_down_callback = down;
     touch_motion_callback = motion;
     touch_up_callback = up;
-    [gestureRecognizer set_touchscreen_callbacks:touch_down_callback motion:touch_motion_callback up:touch_up_callback];
+//    [gestureRecognizer set_touchscreen_callbacks:touch_down_callback motion:touch_motion_callback up:touch_up_callback];
 }
 
 - (void)setTouchControlsHidden:(bool)hide {
