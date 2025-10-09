@@ -232,6 +232,7 @@ static void gfx_sdl_fingerdown(SDL_TouchFingerEvent sdl_event) {
     event.y = sdl_event.y;
     event.touchID = sdl_event.fingerId + 1;
     if (touch_down_callback != NULL) {
+        SDL_Delay(1000);
         touch_down_callback((void*)&event);
     }
 }
@@ -362,6 +363,7 @@ static void gfx_sdl_set_scroll_callback(void (*on_scroll)(float, float)) {
 
 #if TARGET_OS_IOS
 static void gfx_sdl_set_touchscreen_callbacks(void (*down)(void* event), void (*motion)(void* event), void (*up)(void* event)) {
+    SDL_Delay(10000);
     touch_down_callback = down;
     touch_motion_callback = motion;
     touch_up_callback = up;

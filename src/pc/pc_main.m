@@ -594,9 +594,12 @@ int SDL_main(int argc, char *argv[]) {
         network_init(NT_NONE, false);
     }
 
-    UIViewController *gfxVc = get_sdl_viewcontroller();
-    gfx_uikit_init(gfxVc);
-    gfx_uikit_set_touchscreen_callbacks((void*)touch_down, (void*)touch_motion, (void*)touch_up);
+//    UIViewController *gfxVc = get_sdl_viewcontroller();
+    
+//    WAPI.set_touchscreen_callbacks(touch_down, touch_motion, touch_up);
+    
+//    gfx_uikit_init(gfxVc);
+//    gfx_uikit_set_touchscreen_callbacks((void*)touch_down, (void*)touch_motion, (void*)touch_up);
         
     while (true) {
         debug_context_reset();
