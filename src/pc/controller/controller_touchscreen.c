@@ -464,7 +464,7 @@ void render_touch_controls(void) {
                     select_char_texture(ControlElements[i].buttonTexture.buttonUp);
                 }
 
-                DrawSprite(pos.x, pos.y, configAndroidBiggerButtons + size / 100);
+                DrawSprite(pos.x, pos.y, configBiggerButtons + size / 100);
                 
                 break;
         }

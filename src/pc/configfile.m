@@ -217,9 +217,13 @@ bool         configCompressOnStartup              = false;
 bool         configSkipPackGeneration             = false;
 
 // ios port
-unsigned int configTouchMode     = 2;
-bool         configHaptics       = true;
-unsigned int configTouchUiScale  = 100;
+#ifdef TOUCH_CONTROLS
+unsigned int configBiggerButtons;
+unsigned int configTouchControlRed;
+unsigned int configTouchControlGreen;
+unsigned int configTouchControlBlue;
+unsigned int configTouchControlAlpha;
+#endif
 
 // secrets
 bool configExCoopTheme = false;
@@ -375,9 +379,13 @@ static const struct ConfigOption options[] = {
     {.name = "skip_pack_generation",           .type = CONFIG_TYPE_BOOL,   .boolValue   = &configSkipPackGeneration},
 
     // ios port
-    {.name = "touch_controls_mode",            .type = CONFIG_TYPE_UINT,   .uintValue   = &configTouchMode},
-    {.name = "haptics",                        .type = CONFIG_TYPE_BOOL,   .boolValue   = &configHaptics},
-    {.name = "touch_ui_scale",                 .type = CONFIG_TYPE_UINT,   .uintValue   = &configTouchUiScale}
+#ifdef TOUCH_CONTROLS
+    {.name = "touch_bigger_buttons",            .type = CONFIG_TYPE_UINT,   .uintValue   = &configBiggerButtons},
+    {.name = "touch_cred",                        .type = CONFIG_TYPE_UINT,   .uintValue   = &configTouchControlRed},
+    {.name = "touch_cgreen",                        .type = CONFIG_TYPE_UINT,   .uintValue   = &configTouchControlGreen},
+    {.name = "touch_cblue",                        .type = CONFIG_TYPE_UINT,   .uintValue   = &configTouchControlBlue},
+    {.name = "touch_calpha",                        .type = CONFIG_TYPE_UINT,   .uintValue   = &configTouchControlAlpha},
+#endif
 };
 
 struct SecretConfigOption {

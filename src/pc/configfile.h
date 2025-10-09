@@ -166,7 +166,7 @@ extern bool         configSkipPackGeneration;
 
 // Touch controls
 #ifdef TOUCH_CONTROLS
-extern unsigned int configAndroidBiggerButtons;
+extern unsigned int configBiggerButtons;
 extern unsigned int configTouchControlRed;
 extern unsigned int configTouchControlGreen;
 extern unsigned int configTouchControlBlue;
