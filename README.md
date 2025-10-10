@@ -5,7 +5,7 @@
 
 A port of [sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) to iOS
 
-## TODOS 
+## TODOs
  - [X] Compile
  - [X] Fix touch controls
  - [x] Compile libjuice for iOS
@@ -20,7 +20,7 @@ A port of [sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) to iOS
  - [ ] Make first release
  - [ ] Add ability to change touch control buttons size and position
 
-## Thanks to
+## Thanks to...
  - [ckosmic/sm64ex-ios](https://github.com/ckosmic/sm64ex-ios) for iOS port
  - [ManIsCat2/sm64coopdx](https://github.com/ManIsCat2/sm64coopdx) for touch controls
  - [coop-deluxe/sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) for the game!
