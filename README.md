@@ -5,29 +5,24 @@
 
 A port of [sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) to iOS
 
-## TODOS 
+## TODOs
  - [X] Compile
  - [X] Fix touch controls
  - [x] Compile libjuice for iOS
  - [x] Try to understand the code
  - [x] Compile coopnet for iOS
- - [ ] Replace touch controls with better implementation from android port (DOING IT RIGHT NOW)
- - [ ] Disable building for PC
+ - [ ] Replace touch controls with better implementation from android port
  - [ ] Remove simulatedStartFlag
  - [ ] Add gamepad support
  - [ ] Delete support for tvOS
+ - [ ] Disable building for PC
  - [ ] Create a compilation tutorial
  - [ ] Make first release
  - [ ] Add ability to change touch control buttons size and position
 
-Contains code from:
- - VDavid003/sm64-port-android
- - ckosmic/sm64ex-ios
- - robertkirkman/sm64ex-coop (textures, in near future)
- - and coop-deluxe/sm64coopdx of course
+## Thanks to...
+ - [ckosmic/sm64ex-ios](https://github.com/ckosmic/sm64ex-ios) for iOS port
+ - [ManIsCat2/sm64coopdx](https://github.com/ManIsCat2/sm64coopdx) for touch controls
+ - [coop-deluxe/sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) for the game!
 
-code is not good because it's WIP
-
-Most of the Objective C files are ai generated because i just don't understand and don't want to learn ObjC
-
-## TVOS IS NOT SUPPORTED AT ALL! DO NOT TRY TO BUILD IT! I WILL FULLY DELETE SUPPORT IN NEXT UPDATES
+..and Qwen for writing most of the Objective C code
