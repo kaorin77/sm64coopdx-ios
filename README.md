@@ -11,11 +11,11 @@ A port of [sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) to iOS
  - [x] Compile libjuice for iOS
  - [x] Try to understand the code
  - [x] Compile coopnet for iOS
- - [ ] Replace touch controls with better implementation from android port (DOING IT RIGHT NOW)
- - [ ] Disable building for PC
+ - [X] Replace touch controls with better implementation from android port
  - [ ] Remove simulatedStartFlag
  - [ ] Add gamepad support
  - [ ] Delete support for tvOS
+ - [ ] Disable building for PC
  - [ ] Create a compilation tutorial
  - [ ] Make first release
  - [ ] Add ability to change touch control buttons size and position
