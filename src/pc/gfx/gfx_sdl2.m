@@ -22,6 +22,7 @@
 #include <SDL2/SDL_syswm.h>
 #include <SDL2/SDL_video.h>
 #endif // End of OS-Specific GL defines
+
 #include <stdio.h>
 #include <unistd.h>
 #include <Foundation/Foundation.h>
@@ -37,7 +38,6 @@
 #include "pc/utils/misc.h"
 #include "pc/mods/mod_import.h"
 #include "pc/rom_checker.h"
-#include "gfx_uikit.h"
 #import "src/ios/FrameController.h"
 
 #ifndef GL_MAX_SAMPLES
@@ -231,10 +231,13 @@ static void gfx_sdl_fingerdown(SDL_TouchFingerEvent sdl_event) {
     event.x = sdl_event.x;
     event.y = sdl_event.y;
     event.touchID = sdl_event.fingerId + 1;
-    if (touch_down_callback != NULL) {
-        SDL_Delay(1000);
-        touch_down_callback((void*)&event);
-    }
+    
+    touch_down(&event);
+    
+//    if (touch_down_callback != NULL) {
+//        SDL_Delay(1000);
+//        touch_down_callback((void*)&event);
+//    }
 }
 
 static void gfx_sdl_fingermotion(SDL_TouchFingerEvent sdl_event) {
@@ -242,9 +245,12 @@ static void gfx_sdl_fingermotion(SDL_TouchFingerEvent sdl_event) {
     event.x = sdl_event.x;
     event.y = sdl_event.y;
     event.touchID = sdl_event.fingerId + 1;
-    if (touch_motion_callback != NULL) {
-        touch_motion_callback((void*)&event);
-    }
+    touch_motion(&event);
+    
+//    if (touch_motion_callback != NULL) {
+//
+//        touch_motion_callback((void*)&event);
+//    }
 }
 
 static void gfx_sdl_fingerup(SDL_TouchFingerEvent sdl_event) {
@@ -252,9 +258,11 @@ static void gfx_sdl_fingerup(SDL_TouchFingerEvent sdl_event) {
     event.x = sdl_event.x;
     event.y = sdl_event.y;
     event.touchID = sdl_event.fingerId + 1;
-    if (touch_up_callback != NULL) {
-        touch_up_callback((void*)&event);
-    }
+    touch_up(&event);
+    
+//    if (touch_up_callback != NULL) {
+//        touch_up_callback((void*)&event);
+//    }
 }
 #endif
 
@@ -305,12 +313,12 @@ static void gfx_sdl_handle_events(void) {
                 gfx_sdl_ondropfile(event.drop.file);
                 break;
             case SDL_APP_WILLENTERBACKGROUND:
-                paused_by_menu = true;
-                frameController.gfxDisplayLink.paused = true;
+//                paused_by_menu = true;
+//                frameController.gfxDisplayLink.paused = true;
                 break;
             case SDL_APP_DIDENTERFOREGROUND:
-                paused_by_menu = false;
-                frameController.gfxDisplayLink.paused = false;
+//                paused_by_menu = false;
+//                frameController.gfxDisplayLink.paused = false;
                 break;
 #if TOUCH_CONTROLS
             case SDL_FINGERDOWN:
@@ -323,18 +331,18 @@ static void gfx_sdl_handle_events(void) {
                 gfx_sdl_fingerup(event.tfinger);
                 break;
 #endif
-            case SDL_DISPLAYEVENT:
-                switch(event.display.event) {
-                    case SDL_DISPLAYEVENT_CONNECTED:
-                        if([[UIScreen screens] count] > 1) {
-                            setup_external_screen();
-                        }
-                        break;
-                    case SDL_DISPLAYEVENT_DISCONNECTED:
-                        teardown_external_screen();
-                        break;
-                }
-                break;
+//            case SDL_DISPLAYEVENT:
+//                switch(event.display.event) {
+//                    case SDL_DISPLAYEVENT_CONNECTED:
+//                        if([[UIScreen screens] count] > 1) {
+//                            setup_external_screen();
+//                        }
+//                        break;
+//                    case SDL_DISPLAYEVENT_DISCONNECTED:
+//                        teardown_external_screen();
+//                        break;
+//                }
+//                break;
             case SDL_QUIT:
                 game_exit();
                 break;
@@ -363,10 +371,10 @@ static void gfx_sdl_set_scroll_callback(void (*on_scroll)(float, float)) {
 
 #if TARGET_OS_IOS
 static void gfx_sdl_set_touchscreen_callbacks(void (*down)(void* event), void (*motion)(void* event), void (*up)(void* event)) {
-    SDL_Delay(10000);
-    touch_down_callback = down;
-    touch_motion_callback = motion;
-    touch_up_callback = up;
+//    SDL_Delay(10000);
+//    touch_down_callback = down;
+//    touch_motion_callback = motion;
+//    touch_up_callback = up;
 }
 #endif
 

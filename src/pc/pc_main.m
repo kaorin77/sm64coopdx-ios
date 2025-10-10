@@ -601,6 +601,8 @@ int SDL_main(int argc, char *argv[]) {
 //    gfx_uikit_init(gfxVc);
 //    gfx_uikit_set_touchscreen_callbacks((void*)touch_down, (void*)touch_motion, (void*)touch_up);
         
+    vdjui_panel_shutdown_touchconfig();
+    
     while (true) {
         debug_context_reset();
         CTX_BEGIN(CTX_TOTAL);

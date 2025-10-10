@@ -27,7 +27,7 @@
 @end
 
 #if TARGET_OS_IOS
-TouchControlsViewController *tcvc;
+//TouchControlsViewController *tcvc;
 #endif
 UIViewController *gameViewController;
 

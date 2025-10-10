@@ -218,11 +218,11 @@ bool         configSkipPackGeneration             = false;
 
 // ios port
 #ifdef TOUCH_CONTROLS
-unsigned int configBiggerButtons;
-unsigned int configTouchControlRed;
-unsigned int configTouchControlGreen;
-unsigned int configTouchControlBlue;
-unsigned int configTouchControlAlpha;
+unsigned int configBiggerButtons                  = 1;
+unsigned int configTouchControlRed                = 255;
+unsigned int configTouchControlGreen              = 255;
+unsigned int configTouchControlBlue               = 255;
+unsigned int configTouchControlAlpha              = 255;
 #endif
 
 // secrets
