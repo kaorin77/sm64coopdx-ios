@@ -21,10 +21,9 @@ A port of [sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) to iOS
  - [ ] Add ability to change touch control buttons size and position
 
 Contains code from:
- - VDavid003/sm64-port-android
- - ckosmic/sm64ex-ios
- - robertkirkman/sm64ex-coop (textures, in near future)
- - and coop-deluxe/sm64coopdx of course
+ - [ckosmic/sm64ex-ios](https://github.com/ckosmic/sm64ex-ios) (iOS port)
+ - [ManIsCat2/sm64coopdx](https://github.com/ManIsCat2/sm64coopdx) (touch controls)
+ - and [coop-deluxe/sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) of course
 
 code is not good because it's WIP
 
