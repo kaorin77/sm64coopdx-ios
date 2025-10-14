@@ -33,6 +33,7 @@ TARGET_RK3588 ?= 0
 
 # Build for iOS devices
 TARGET_IOS ?= 1
+TARGET_IOS_SIM ?= 0
 
 # Makeflag to enable OSX fixes
 OSX_BUILD ?= 1
@@ -516,6 +517,10 @@ _ := $(shell $(PYTHON) $(TOOLS_DIR)/copy_extended_sounds.py)
 #==============================================================================#
 
 BUILD_DIR_BASE := build
+ifeq ($(TARGET_IOS_SIM),1)
+	BUILD_DIR_BASE := build_sim
+endif
+
 # BUILD_DIR is the location where all build artifacts are placed
 BUILD_DIR := $(BUILD_DIR_BASE)/$(VERSION)_pc
 
@@ -1024,7 +1029,11 @@ ifeq ($(WINDOWS_BUILD),1)
   endif
 else ifeq ($(OSX_BUILD),1)
   ifeq ($(TARGET_IOS),1)
-    LDFLAGS += -L./lib/lua/ios/ -l lua53
+    ifeq ($(TARGET_IOS_SIM),1)
+      LDFLAGS += -L./lib/lua/ios-arm64_x86_64-simulator/ -l lua53
+    else
+      LDFLAGS += -L./lib/lua/ios-arm64/ -l lua53
+    endif
   else
     ifeq ($(shell uname -m),arm64)
       LDFLAGS += -L./lib/lua/mac_arm/ -l lua53
@@ -1055,7 +1064,13 @@ ifeq ($(COOPNET),1)
     endif
   else ifeq ($(OSX_BUILD),1)
     ifeq ($(TARGET_IOS),1)
-      LDFLAGS += -L./lib/coopnet/ios/ -l coopnet -l juice
+      ifeq ($(TARGET_IOS_SIM),1)
+        LDFLAGS += -L./lib/coopnet/ios-arm64_x86_64-simulator/ -l coopnet
+        LDFLAGS += -L./lib/coopnet/ios-arm64_x86_64-simulator/ -l juice
+	  else
+        LDFLAGS += -L./lib/coopnet/ios-arm64/ -l coopnet
+        LDFLAGS += -L./lib/coopnet/ios-arm64/ -l juice
+	  endif
     else
       ifeq ($(shell uname -m),arm64)
         LDFLAGS += -Wl,-rpath,@loader_path -L./lib/coopnet/mac_arm/ -l coopnet

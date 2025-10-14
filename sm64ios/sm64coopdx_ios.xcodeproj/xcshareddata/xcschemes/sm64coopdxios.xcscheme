@@ -16,8 +16,8 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "5918D1FC27192A420085DDED"
-                     BuildableName = "sm64ios.app"
-                     BlueprintName = "sm64ios"
+                     BuildableName = "sm64coopdx.app"
+                     BlueprintName = "sm64coopdx"
                      ReferencedContainer = "container:sm64coopdx_ios.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5918D1FC27192A420085DDED"
-               BuildableName = "sm64ios.app"
-               BlueprintName = "sm64ios"
+               BuildableName = "sm64coopdx.app"
+               BlueprintName = "sm64coopdx"
                ReferencedContainer = "container:sm64coopdx_ios.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -64,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5918D1FC27192A420085DDED"
-            BuildableName = "sm64ios.app"
-            BlueprintName = "sm64ios"
+            BuildableName = "sm64coopdx.app"
+            BlueprintName = "sm64coopdx"
             ReferencedContainer = "container:sm64coopdx_ios.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,8 +81,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5918D1FC27192A420085DDED"
-            BuildableName = "sm64ios.app"
-            BlueprintName = "sm64ios"
+            BuildableName = "sm64coopdx.app"
+            BlueprintName = "sm64coopdx"
             ReferencedContainer = "container:sm64coopdx_ios.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -468,12 +468,8 @@ static void gfx_sdl_set_cursor_visible(bool visible) { SDL_ShowCursor(visible ? 
 struct GfxWindowManagerAPI gfx_sdl = {
     gfx_sdl_init,
     gfx_sdl_set_keyboard_callbacks,
-    gfx_sdl_set_scroll_callback,
-#if TARGET_OS_IOS
     gfx_sdl_set_touchscreen_callbacks,
-#else
-    NULL,
-#endif
+    gfx_sdl_set_scroll_callback,
     gfx_sdl_main_loop,
     gfx_sdl_get_dimensions,
     gfx_sdl_handle_events,

@@ -19,7 +19,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		5918D1FD27192A420085DDED /* sm64ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sm64ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5918D1FD27192A420085DDED /* sm64coopdx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sm64coopdx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5918D21027192A4C0085DDED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5918D217271956920085DDED /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build.sh; path = ../build.sh; sourceTree = "<group>"; };
 		5918D43C271C1EB80085DDED /* libSDL2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +74,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5918D1FD27192A420085DDED /* sm64ios.app */,
+				5918D1FD27192A420085DDED /* sm64coopdx.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,9 +161,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5918D1FC27192A420085DDED /* sm64ios */ = {
+		5918D1FC27192A420085DDED /* sm64coopdx */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5918D21327192A4D0085DDED /* Build configuration list for PBXNativeTarget "sm64ios" */;
+			buildConfigurationList = 5918D21327192A4D0085DDED /* Build configuration list for PBXNativeTarget "sm64coopdx" */;
 			buildPhases = (
 				5918D21627192A6A0085DDED /* Build sm64coopdx for iOS */,
 				59A67E11272743BB00FF5D6C /* Resources */,
@@ -173,9 +173,9 @@
 			);
 			dependencies = (
 			);
-			name = sm64ios;
+			name = sm64coopdx;
 			productName = sm64ios;
-			productReference = 5918D1FD27192A420085DDED /* sm64ios.app */;
+			productReference = 5918D1FD27192A420085DDED /* sm64coopdx.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -208,7 +208,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5918D1FC27192A420085DDED /* sm64ios */,
+				5918D1FC27192A420085DDED /* sm64coopdx */,
 			);
 		};
 /* End PBXProject section */
@@ -317,7 +317,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.3.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -399,7 +399,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.3.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -499,7 +499,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5918D21327192A4D0085DDED /* Build configuration list for PBXNativeTarget "sm64ios" */ = {
+		5918D21327192A4D0085DDED /* Build configuration list for PBXNativeTarget "sm64coopdx" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5918D21427192A4D0085DDED /* Debug */,
