@@ -9,10 +9,13 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>sm64ios.xcscheme_^#shared#^_</key>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>5918D1FC27192A420085DDED</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
