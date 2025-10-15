@@ -1,6 +1,6 @@
 codesign --remove-signature "${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}"
 
-#rm -rf $(BUILT_PRODUCTS_DIR)
+rm -rf $(BUILT_PRODUCTS_DIR)
 
 cat > ./levels/level_rules.mk << 'EOF'
 #define STUB_LEVEL(_0, _1, _2, _3, _4, _5, _6, _7, _8)

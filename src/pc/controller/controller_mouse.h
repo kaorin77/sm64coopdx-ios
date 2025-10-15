@@ -40,4 +40,12 @@ void controller_mouse_leave_relative(void);
 
 void mouse_on_scroll(float x, float y);
 
+#ifdef TOUCH_CONTROLS
+#include <SDL2/SDL.h>
+
+void handle_touch_up(SDL_TouchFingerEvent *event);
+void handle_touch_down(SDL_TouchFingerEvent *event);
+void handle_touch_motion(SDL_TouchFingerEvent *event);
+#endif
+
 #endif

@@ -32,6 +32,7 @@
 #include "../configfile.h"
 #include "../cliopts.h"
 #include "pc/controller/controller_keyboard.h"
+#include "pc/controller/controller_mouse.h"
 #include "pc/controller/controller_sdl.h"
 #include "pc/controller/controller_bind_mapping.h"
 #include "pc/controller/controller_touchscreen.h"
@@ -232,6 +233,7 @@ static void gfx_sdl_fingerdown(SDL_TouchFingerEvent sdl_event) {
     event.y = sdl_event.y;
     event.touchID = sdl_event.fingerId + 1;
     
+    handle_touch_down(&sdl_event);
     touch_down(&event);
     
 //    if (touch_down_callback != NULL) {
@@ -245,6 +247,8 @@ static void gfx_sdl_fingermotion(SDL_TouchFingerEvent sdl_event) {
     event.x = sdl_event.x;
     event.y = sdl_event.y;
     event.touchID = sdl_event.fingerId + 1;
+    
+    handle_touch_motion(&sdl_event);
     touch_motion(&event);
     
 //    if (touch_motion_callback != NULL) {
@@ -258,6 +262,8 @@ static void gfx_sdl_fingerup(SDL_TouchFingerEvent sdl_event) {
     event.x = sdl_event.x;
     event.y = sdl_event.y;
     event.touchID = sdl_event.fingerId + 1;
+    
+    handle_touch_up(&sdl_event);
     touch_up(&event);
     
 //    if (touch_up_callback != NULL) {
@@ -369,7 +375,7 @@ static void gfx_sdl_set_scroll_callback(void (*on_scroll)(float, float)) {
     m_scroll = on_scroll;
 }
 
-#if TARGET_OS_IOS
+#if TOUCH_CONTROLS
 static void gfx_sdl_set_touchscreen_callbacks(void (*down)(void* event), void (*motion)(void* event), void (*up)(void* event)) {
 //    SDL_Delay(10000);
 //    touch_down_callback = down;

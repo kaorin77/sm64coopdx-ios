@@ -176,6 +176,7 @@ void touch_down(struct TouchEvent* event) {
     gGamepadActive = false;
     struct Position pos;
     s32 size;
+    
     // config-only elements
     if (gInTouchConfig) {
         for(u32 i = 0; i < ControlConfigElementsLength; i++) {
