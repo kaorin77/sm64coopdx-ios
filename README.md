@@ -44,6 +44,7 @@ mv include/include include/SDL2
  - [x] Compile coopnet for iOS
  - [x] Replace touch controls with better implementation from android port
  - [ ] Remove simulatedStartFlag
+ - [ ] Add app icon
  - [ ] Add gamepad support
  - [x] Delete support for tvOS
  - [x] Write building tutorial
