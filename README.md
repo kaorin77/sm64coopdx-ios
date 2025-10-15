@@ -10,7 +10,7 @@ A port of [sm64coopdx](https://github.com/coop-deluxe/sm64coopdx) to iOS
  - macOS 12+
  - [Homebrew](https://brew.sh/)
 ### Installing requirements
-1. Download Xcode 14.2 if you have macOS <13 or Xcode 16.2 if you have macOS >14 (they're both tested)
+1. Download Xcode 14.2 if you have macOS <=13 or Xcode 16.2 if you have macOS >=14 (they're both tested)
 
 2. Install required packages using Homebrew:
 ```bash
