@@ -30,10 +30,11 @@ mv include/include include/SDL2
 
 ### Building
 1. If you want an app icon, then run `./appicon.sh`
-2. Open `sm64ios.xcworkspace` (not `sm64coopdx_ios.xcodeproj`)
-3. Select sm64coopdx_ios in Project navigator and under "Signing & Capabilities" choose your team and change bundle identifier
-4. Set your build target to `sm64coopdx -> <Your iOS build target>` (simulators are supported)
-5. Press `Command + B` or press Product -> Build
+2. `cd` into `tools` directory and run `make`
+3. Open `sm64ios.xcworkspace` (not `sm64coopdx_ios.xcodeproj`)
+4. Select sm64coopdx_ios in Project navigator and under "Signing & Capabilities" choose your team and change bundle identifier
+5. Set your build target to `sm64coopdx -> <Your iOS build target>` (simulators are supported)
+6. Press `Command + B` or press Product -> Build
 
 
 ## TODOs
