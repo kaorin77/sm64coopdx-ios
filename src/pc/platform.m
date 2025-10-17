@@ -11,6 +11,10 @@
 #include <shlwapi.h>
 #elif defined(__APPLE__)
 #include <mach-o/dyld.h>
+#ifndef TARGET_IOS
+// CoreFoundation is used for iOS paths
+#include <CoreFoundation/CoreFoundation.h>
+#endif
 #else
 #include <unistd.h>
 #endif
@@ -292,6 +296,122 @@ static void sys_fatal_impl(const char *msg) {
     exit(1);
 }
 
+#elif defined(TARGET_OS_IOS)
+
+#include <CoreFoundation/CoreFoundation.h>
+#include <sys/stat.h>
+
+const char *sys_user_path(void) {
+    static char path[SYS_MAX_PATH] = { 0 };
+    if ('\0' != path[0]) { return path; }
+
+    // Get the Documents directory for the app
+    CFURLRef documentsURL = CFURLCreateWithFileSystemPath(NULL,
+        CFSTR("/var/mobile/Applications"), kCFURLPOSIXPathStyle, true);
+    CFStringRef bundleID = CFBundleGetIdentifier(CFBundleGetMainBundle());
+    if (bundleID) {
+        CFStringRef appDir = CFStringCreateWithFormat(NULL, NULL, CFSTR("%@/%@"), documentsURL ? CFURLGetString(documentsURL) : CFSTR(""), bundleID);
+        if (appDir) {
+            CFRelease(documentsURL);
+            documentsURL = CFURLCreateWithFileSystemPath(NULL, appDir, kCFURLPOSIXPathStyle, true);
+            CFRelease(appDir);
+        }
+    }
+
+    if (!documentsURL) {
+        // Fallback to home directory Documents
+        const char *home = getenv("HOME");
+        if (home) {
+            snprintf(path, SYS_MAX_PATH, "%s/Documents", home);
+        } else {
+            // Last resort
+            strcpy(path, ".");
+        }
+        CFRelease(documentsURL);
+        return path;
+    }
+
+    CFURLGetFileSystemRepresentation(documentsURL, true, (UInt8*)path, SYS_MAX_PATH);
+    CFRelease(documentsURL);
+
+    // Ensure the directory exists
+    struct stat st = {0};
+    if (stat(path, &st) == -1) {
+        mkdir(path, 0755);
+    }
+
+    return path;
+}
+
+const char *sys_resource_path(void) {
+    static char path[SYS_MAX_PATH] = { 0 };
+    if ('\0' != path[0]) { return path; }
+
+    // Get the app bundle's Resources directory
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    if (mainBundle) {
+        CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+        if (resourcesURL) {
+            CFURLGetFileSystemRepresentation(resourcesURL, true, (UInt8*)path, SYS_MAX_PATH);
+            CFRelease(resourcesURL);
+            return path;
+        }
+    }
+
+    // Fallback to executable directory
+    return sys_exe_path_dir();
+}
+
+const char *sys_exe_path_dir(void) {
+    static char path[SYS_MAX_PATH] = { 0 };
+    if ('\0' != path[0]) { return path; }
+
+    // On iOS, the executable is typically in the app bundle
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    if (mainBundle) {
+        CFURLRef bundleURL = CFBundleCopyBundleURL(mainBundle);
+        if (bundleURL) {
+            CFURLGetFileSystemRepresentation(bundleURL, true, (UInt8*)path, SYS_MAX_PATH);
+            CFRelease(bundleURL);
+            return path;
+        }
+    }
+
+    // Fallback
+    strcpy(path, ".");
+    return path;
+}
+
+const char *sys_exe_path_file(void) {
+    static char path[SYS_MAX_PATH] = { 0 };
+    if ('\0' != path[0]) { return path; }
+
+    // On iOS, getting the exact executable path is tricky.
+    // Use the main bundle executable URL if available.
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    if (mainBundle) {
+        CFURLRef executableURL = CFBundleCopyExecutableURL(mainBundle);
+        if (executableURL) {
+            CFURLGetFileSystemRepresentation(executableURL, true, (UInt8*)path, SYS_MAX_PATH);
+            CFRelease(executableURL);
+            return path;
+        }
+    }
+
+    // Fallback: try to get from argv[0] if available in context, or use bundle
+    const char *exeDir = sys_exe_path_dir();
+    const char *exeName = "executable"; // Placeholder, as the actual name might not be easily available
+    snprintf(path, SYS_MAX_PATH, "%s/%s", exeDir, exeName);
+
+    return path;
+}
+
+static void sys_fatal_impl(const char *msg) {
+    fprintf(stderr, "FATAL ERROR:\n%s\n", msg);
+    fflush(stderr);
+    exit(1);
+}
+
 #elif defined(HAVE_SDL2)
 
 // we can just ask SDL for most of this shit if we have it
@@ -332,7 +452,7 @@ const char *sys_user_path(void) {
 
 const char *sys_resource_path(void)
 {
-#ifdef __APPLE__ // Kinda lazy, but I don't know how to add CoreFoundation.framework
+#ifndef TARGET_IOS // iOS paths are handled separately
     static char path[SYS_MAX_PATH];
     if ('\0' != path[0]) { return path; }
 
@@ -367,7 +487,7 @@ const char *sys_exe_path_file(void) {
     static char path[SYS_MAX_PATH];
     if ('\0' != path[0]) { return path; }
 
-#if defined(__APPLE__)
+#if defined(__APPLE__) && !defined(TARGET_IOS)
     uint32_t bufsize = SYS_MAX_PATH;
     int res = _NSGetExecutablePath(path, &bufsize);
 
