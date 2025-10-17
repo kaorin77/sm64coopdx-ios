@@ -45,11 +45,10 @@ mv include/include include/SDL2
  - [x] Compile coopnet for iOS
  - [x] Replace touch controls with better implementation from android port
  - [ ] Remove simulatedStartFlag
- - [ ] Add app icon
+ - [X] Add app icon
  - [ ] Add gamepad support
  - [x] Delete support for tvOS
  - [x] Write building tutorial
- - [ ] Make first release
 
 ## Thanks to...
  - [ckosmic/sm64ex-ios](https://github.com/ckosmic/sm64ex-ios) for iOS port
