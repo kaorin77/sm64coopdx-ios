@@ -52,7 +52,7 @@ ENHANCE_LEVEL_TEXTURES ?= 1
 # Enable Discord Game SDK (used for Discord invites)
 DISCORD_SDK ?= 0
 # Enable CoopNet SDK (used for CoopNet server hosting)
-COOPNET ?= 0
+COOPNET ?= 1
 # Enable docker build workarounds
 DOCKERBUILD ?= 0
 # Sets your optimization level for building.
@@ -835,7 +835,7 @@ else ifeq ($(findstring SDL,$(WINDOW_API)),SDL)
   else ifeq ($(TARGET_IOS),1)
 	  ifeq ($(TARGET_OS_IOS),1)
       BACKEND_LDFLAGS += -framework OpenGLES -framework AVFoundation -framework AudioToolbox -framework CoreFoundation -framework CoreGraphics -framework CoreBluetooth -framework CoreAudio -framework IOKit -framework GameController -framework Foundation -framework UIKit -framework QuartzCore -framework CoreMotion -framework CoreHaptics -framework Metal -L. -lSDL2 -lc++ -lstdc++ -D.
-      BACKEND_CFLAGS += -DTARGET_OS_IOS
+      BACKEND_CFLAGS += -D__IOS__=1
     else
       BACKEND_LDFLAGS += -framework OpenGLES -framework AVFoundation -framework AudioToolbox -framework CoreFoundation -framework CoreGraphics -framework CoreBluetooth -framework CoreAudio -framework GameController -framework Foundation -framework UIKit -framework QuartzCore -framework CoreHaptics -framework Metal -L. -lSDL2 -lc++ -lstdc++ -D.
       BACKEND_CFLAGS += -DTARGET_OS_TV

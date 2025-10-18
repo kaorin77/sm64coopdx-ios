@@ -25,7 +25,7 @@
 
 #import <Foundation/Foundation.h>
 
-#if TARGET_OS_IOS
+#ifdef __IOS__
 NSUserDefaults *defaults;
 #endif
 
@@ -203,11 +203,7 @@ char         configPassword[MAX_CONFIG_STRING]    = "";
 char         configDestId[MAX_CONFIG_STRING]      = "0";
 // DJUI settings
 unsigned int configDjuiTheme                      = DJUI_THEME_DARK;
-#ifdef HANDHELD
-bool         configDjuiThemeCenter                = false;
-#else
 bool         configDjuiThemeCenter                = true;
-#endif
 bool         configDjuiThemeGradients             = true;
 unsigned int configDjuiThemeFont                  = FONT_NORMAL;
 unsigned int configDjuiScale                      = 0;
@@ -369,7 +365,6 @@ static const struct ConfigOption options[] = {
     {.name = "coopnet_dest",                   .type = CONFIG_TYPE_STRING, .stringValue = (char*)&configDestId, .maxStringLength = MAX_CONFIG_STRING},
     // DJUI settings
     {.name = "djui_theme",                     .type = CONFIG_TYPE_UINT,   .uintValue   = &configDjuiTheme},
-    {.name = "djui_theme_center",              .type = CONFIG_TYPE_BOOL,   .boolValue   = &configDjuiThemeCenter},
     {.name = "djui_theme_gradients",           .type = CONFIG_TYPE_BOOL,   .boolValue   = &configDjuiThemeGradients},
     {.name = "djui_theme_font",                .type = CONFIG_TYPE_UINT,   .uintValue   = &configDjuiThemeFont},
     {.name = "djui_scale",                     .type = CONFIG_TYPE_UINT,   .uintValue   = &configDjuiScale},
@@ -674,7 +669,7 @@ const char *configfile_backup_name(void) {
 // Loads the config file specified by 'filename'
 static void configfile_load_internal(const char *filename, bool* error) {
     unsigned int temp = 0;
-#if TARGET_OS_IOS
+#ifdef __IOS__
     NSString *nsFilename = [NSString stringWithUTF8String:filename];
     if(defaults == nil) {
         defaults = [[NSUserDefaults alloc] initWithSuiteName:SUITE_NAME];
@@ -715,7 +710,7 @@ static void configfile_load_internal(const char *filename, bool* error) {
             p++;
         // skip comment or empty line
         if (!*p || *p == '#') {
-#if !TARGET_OS_IOS
+#ifndef __IOS__
             free(line);
 #endif // !TARGET_OS_IOS
             continue;
@@ -799,12 +794,12 @@ static void configfile_load_internal(const char *filename, bool* error) {
         }
 NEXT_OPTION:
     ;
-#if !TARGET_OS_IOS
+#ifndef __IOS__
         free(line);
         line = NULL;
 #endif
     }
-#if !TARGET_OS_IOS
+#ifndef __IOS__
     if (line) {
         free(line);
     }
@@ -892,7 +887,7 @@ static void configfile_save_option(FILE *file, const struct ConfigOption *option
 // Writes the config file to 'filename'
 // Writes the config file to 'filename'
 void configfile_save(const char *filename) {
-#if TARGET_OS_IOS
+#ifdef __IOS__
     char file[4096] = {0};
     int length = 0;
     printf("Saving configuration to NSUserDefaults.\n");

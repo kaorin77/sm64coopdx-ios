@@ -296,7 +296,7 @@ static void sys_fatal_impl(const char *msg) {
     exit(1);
 }
 
-#elif defined(TARGET_OS_IOS)
+#elif defined(__IOS__)
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <sys/stat.h>

@@ -12,7 +12,7 @@
 #import <UIKit/UIKit.h>
 
 #import "../../ios/native_ui_controller.h"
-#if TARGET_OS_IOS
+#ifdef __IOS__
 #import "../../ios/ios/ExternalGameViewController.h"
 #import "../../ios/ios/TouchControlsViewController.h"
 #elif TARGET_OS_TV
@@ -26,7 +26,7 @@
 - (BOOL)prefersHomeIndicatorAutoHidden;
 @end
 
-#if TARGET_OS_IOS
+#if __IOS__
 //TouchControlsViewController *tcvc;
 #endif
 UIViewController *gameViewController;

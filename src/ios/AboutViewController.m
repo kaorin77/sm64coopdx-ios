@@ -21,7 +21,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#if TARGET_OS_IOS
+#ifdef __IOS__
 - (IBAction)SourcePressed:(id)sender {
     NSURL *url = [NSURL URLWithString:@"https://github.com/ckosmic/sm64ex-ios"];
     [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];

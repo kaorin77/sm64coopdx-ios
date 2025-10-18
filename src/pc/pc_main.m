@@ -80,9 +80,9 @@
 #include <windows.h>
 #endif
 
-#import "src/ios/FrameController.h"
-#import "src/ios/GameTimer.h"
-#import "src/ios/native_ui_controller.h"
+//#import "src/ios/FrameController.h"
+//#import "src/ios/GameTimer.h"
+//#import "src/ios/native_ui_controller.h"
 
 extern Vp D_8032CF00;
 
@@ -438,7 +438,7 @@ void* main_game_init(UNUSED void* dummy) {
     gGameInited = true;
 }
 
-//#if TARGET_OS_IOS
+//#ifdef __IOS__
 //void present_first_screen(void) {
 //    present_viewcontroller(@"MenuNav", true);
 //}

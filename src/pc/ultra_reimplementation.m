@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#if TARGET_OS_IOS
+#ifdef __IOS__
 NSUserDefaults *defaults;
 #endif
 
@@ -138,7 +138,7 @@ s32 osEepromLongRead(UNUSED OSMesgQueue *mq, u8 address, u8 *buffer, int nbytes)
         return 0;
     }
 
-#if TARGET_OS_IOS
+#ifdef __IOS__
     if (defaults == nil) {
         defaults = [[NSUserDefaults alloc] initWithSuiteName:SUITE_NAME];
     }
@@ -176,7 +176,7 @@ s32 osEepromLongWrite(UNUSED OSMesgQueue *mq, u8 address, u8 *buffer, int nbytes
         return 0;
     }
 
-#if TARGET_OS_IOS
+#ifdef __IOS__
     if (defaults == nil) {
         defaults = [[NSUserDefaults alloc] initWithSuiteName:SUITE_NAME];
     }

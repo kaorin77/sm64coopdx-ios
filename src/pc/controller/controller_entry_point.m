@@ -6,7 +6,7 @@
 
 #include "controller_keyboard.h"
 #include "controller_sdl.h"
-#ifdef TARGET_OS_IOS
+#ifdef __IOS__
 #include "controller_touchscreen.h"
 #endif
 

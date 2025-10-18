@@ -11,7 +11,7 @@
 
 UIViewController *gameViewController;
 UIWindow *mainWindow;
-#if TARGET_OS_IOS
+#ifdef __IOS__
 UIWindow *externalWindow;
 #endif
 
@@ -48,7 +48,7 @@ void gfx_uikit_init(UIViewController *viewControllerPointer) {
 //    [gameViewController setNeedsUpdateOfScreenEdgesDeferringSystemGestures];
 }
 
-#if TARGET_OS_IOS
+#ifdef __IOS__
 void setup_external_screen() {
 //    [tcvc.view removeFromSuperview];
 //    mainWindow.rootViewController = tcvc;

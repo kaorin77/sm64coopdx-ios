@@ -168,7 +168,7 @@ static void gfx_sdl_init(const char *window_title) {
     }
     controller_bind_init();
     
-    [frameController.onScreenRefresh addObject:[NSValue valueWithPointer:gfx_sdl_swap_buffers_begin]];
+//    [frameController.onScreenRefresh addObject:[NSValue valueWithPointer:gfx_sdl_swap_buffers_begin]];
     SDL_RaiseWindow(wnd);
     
     perf_freq = SDL_GetPerformanceFrequency();
